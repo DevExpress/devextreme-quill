@@ -44,6 +44,8 @@ runs:
     - name: Setup chrome
       if: ${{ !startsWith(inputs.branch, '22') }}
       uses: ./devextreme-repo/.github/actions/setup-chrome
+      with:
+        chrome-version: '121.0.6167.160'
 
     - name: Prepare localization
       shell: bash
