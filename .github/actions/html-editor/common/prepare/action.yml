@@ -41,10 +41,11 @@ runs:
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
         restore-keys: ${{ runner.os }}-node-modules
 
-    - name: Install .NET 6.0
+    - name: Install .NET 6
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6
+        runtime: dotnet
 
     - name: Install dependencies
       shell: bash
