@@ -51,7 +51,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.e2e-package-directory }}
       run: |
-        all_args="--concurrency 2 --browsers=chrome:devextreme-shr2 --componentFolder ${{ inputs.component-directory }} --quarantineMode ${{ env.TEST_SUITE.quarantineMode}}"
+        all_args="--concurrency 1 --browsers=chrome:devextreme-shr2 --componentFolder ${{ inputs.component-directory }} --quarantineMode ${{ env.TEST_SUITE.quarantineMode}}"
         echo "$all_args"
         npx nx test $all_args
 
