@@ -51,6 +51,14 @@ class Input extends Module {
       || event.defaultPrevented
       || !INSERT_TYPES.includes(event.inputType)
     ) {
+      if (event.inputType === 'insertFromDrop') {
+        const htmlToInsert = event.dataTransfer.getData('text/html');
+        const containsTable = htmlToInsert.includes('<table');
+        if (containsTable) {
+          // NOTE: Table drag is not supported.
+          event.preventDefault();
+        }
+      }
       return;
     }
 
