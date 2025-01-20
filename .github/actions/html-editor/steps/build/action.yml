@@ -41,7 +41,6 @@ runs:
       run: npm run build
 
     - name: Build:systemjs
-      if: ${{ !startsWith(inputs.branch, '22') }}
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: npm run build:systemjs
