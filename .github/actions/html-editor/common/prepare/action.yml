@@ -11,6 +11,10 @@ inputs:
   devextreme-package-directory:
     description: DevExtreme package path
     default: devextreme-repo
+  devextreme-scss-package-directory:
+    description: DevExtreme scss package path
+    required: true
+    default: devextreme-repo
   node-version:
     description: Node.js version
     required: true
@@ -41,6 +45,11 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: npm install --no-audit --no-fund
+
+    - name: Install css dependencies
+      shell: bash
+      working-directory: ${{ inputs.devextreme-scss-package-directory }}
+      run: npm install
 
     - name: Download quill ci package
       uses: actions/download-artifact@v3
