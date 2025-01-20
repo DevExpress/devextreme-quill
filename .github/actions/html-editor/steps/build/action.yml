@@ -40,7 +40,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: |
-        7z a -tzip -mx3 -mmt2 devextreme-artifact.zip artifacts scss/bundles
+        7z a -tzip -mx3 -mmt2 devextreme-artifact.zip artifacts ../devextreme-scss/scss/bundles
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
