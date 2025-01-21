@@ -53,7 +53,7 @@ runs:
       run: |
         all_args="--concurrency 1 --browsers=chrome:devextreme-shr2 --componentFolder ${{ inputs.component-directory }} --quarantineMode ${{ env.TEST_SUITE.quarantineMode}}"
         echo "$all_args"
-        npx nx test $all_args
+        npm run test -- $all_args
 
     - name: Copy compared screenshot artifacts
       if: ${{ failure() }}
