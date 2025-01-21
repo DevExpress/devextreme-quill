@@ -11,10 +11,14 @@ inputs:
   devextreme-package-directory:
     description: DevExtreme package path
     default: devextreme-repo
+  devextreme-scss-package-directory:
+    description: DevExtreme scss package path
+    required: true
+    default: devextreme-repo
   node-version:
     description: Node.js version
     required: true
-    default: '18'
+    default: '20'
 runs:
   using: composite
   steps:
@@ -37,6 +41,11 @@ runs:
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
         restore-keys: ${{ runner.os }}-node-modules
 
+    - name: Install .NET 6 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.working-directory }}
@@ -57,3 +66,8 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: npm install --global cross-env
+
+    - name: Install css dependencies
+      shell: bash
+      working-directory: ${{ inputs.devextreme-scss-package-directory }}
+      run: npm install

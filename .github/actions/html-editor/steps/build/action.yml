@@ -12,6 +12,10 @@ inputs:
     description: DevExtreme package path
     required: true
     default: devextreme-repo
+  devextreme-scss-package-directory:
+    description: DevExtreme scss package path
+    required: true
+    default: devextreme-repo
 runs:
   using: composite
   steps:
@@ -20,6 +24,7 @@ runs:
       with:
         branch: ${{ inputs.branch }}
         working-directory: ${{ inputs.working-directory }}
+        devextreme-scss-package-directory: ${{ inputs.devextreme-scss-package-directory }}
 
     - name: Build
       shell: bash
@@ -30,8 +35,12 @@ runs:
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 'true'
       run: npm run build
 
+    - name: Build scss
+      shell: bash
+      working-directory: ${{ inputs.devextreme-scss-package-directory }}
+      run: npm run build
+
     - name: Build:systemjs
-      if: ${{ !startsWith(inputs.branch, '22') }}
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: npm run build:systemjs
@@ -40,7 +49,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: |
-        7z a -tzip -mx3 -mmt2 devextreme-artifact.zip artifacts scss/bundles
+        7z a -tzip -mx3 -mmt2 devextreme-artifact.zip artifacts ../devextreme-scss/scss/bundles
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3

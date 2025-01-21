@@ -53,6 +53,7 @@ jobs:
         with:
           branch: ${{ matrix.branch }}
           devextreme-package-directory: ${{ 'devextreme-repo/packages/devextreme' }}
+          devextreme-scss-package-directory: ${{ 'devextreme-repo/packages/devextreme-scss' }}
 
   qunit:
     needs: [build-devextreme, set-up-branches]
@@ -79,7 +80,7 @@ jobs:
 
   testcafe:
     needs: [build-devextreme, set-up-branches]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     timeout-minutes: 15
     name: testcafe ${{ matrix.branch }}
     strategy:
