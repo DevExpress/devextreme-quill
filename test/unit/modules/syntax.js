@@ -17,10 +17,16 @@ describe('Syntax', function () {
     ];
   });
 
-  beforeEach(function () {
+  afterAll(function () {
+    Quill.register(CodeBlock, true);
+    Quill.register(CodeBlockContainer, true);
+  });
+
+  function initializeQuill(codeBlockText) {
+    const codeBlockMarkup = codeBlockText ?? 'var test = 1;<br>var bugz = 0;<br>';
     const container = this.initialize(
       HTMLElement,
-      `<pre data-language="javascript">var test = 1;<br>var bugz = 0;<br></pre>
+      `<pre data-language="javascript">${codeBlockMarkup}</pre>
       <p><br></p>`,
     );
     this.quill = new Quill(container, {
@@ -31,14 +37,64 @@ describe('Syntax', function () {
         },
       },
     });
-  });
+  }
 
-  afterAll(function () {
-    Quill.register(CodeBlock, true);
-    Quill.register(CodeBlockContainer, true);
+  describe('highlightjs api', function () {
+    it('logs no deprecation warning after code-block is applied (T1247520)', function (done) {
+      const consoleSpy = spyOn(console, 'log');
+
+      initializeQuill.call(this);
+
+      setTimeout(() => {
+        const logArgs = consoleSpy.calls.allArgs();
+        expect(consoleSpy)
+          .withContext(`console.log was called with "${logArgs}"`)
+          .not.toHaveBeenCalled();
+        consoleSpy.calls.reset();
+        done();
+      }, HIGHLIGHT_INTERVAL + 1);
+    });
+
+    it('works with no errors if old version of highlightjs is used', function (done) {
+      const { versionString } = hljs;
+      const initialCodeBlockText = 'my text\n';
+
+      hljs.versionString = '10.1.4';
+      const highlightSpy = spyOn(hljs, 'highlight');
+
+      initializeQuill.call(this, initialCodeBlockText);
+
+      setTimeout(() => {
+        expect(highlightSpy).toHaveBeenCalledWith('javascript', initialCodeBlockText);
+        hljs.versionString = versionString;
+        highlightSpy.calls.reset();
+        done();
+      }, HIGHLIGHT_INTERVAL + 1);
+    });
+
+    it('uses modern api for new versions', function (done) {
+      const { versionString } = hljs;
+      const initialCodeBlockText = 'my text\n';
+
+      hljs.versionString = '12.1.1';
+      const highlightSpy = spyOn(hljs, 'highlight');
+
+      initializeQuill.call(this, initialCodeBlockText);
+
+      setTimeout(() => {
+        expect(highlightSpy).toHaveBeenCalledWith(initialCodeBlockText, { language: 'javascript' });
+        hljs.versionString = versionString;
+        highlightSpy.calls.reset();
+        done();
+      }, HIGHLIGHT_INTERVAL + 1);
+    });
   });
 
   describe('highlighting', function () {
+    beforeEach(function () {
+      initializeQuill.call(this);
+    });
+
     it('initialize', function () {
       expect(this.quill.root).toEqualHTML(
         `<div class="ql-code-block-container" spellcheck="false">
@@ -225,6 +281,12 @@ describe('Syntax', function () {
       }, HIGHLIGHT_INTERVAL + 1);
     });
 
+    it('code language', function () {
+      expect(this.quill.getSemanticHTML()).toContain(
+        'data-language="javascript"',
+      );
+    });
+
     describe('allowedChildren', function () {
       beforeAll(function () {
         SyntaxCodeBlock.allowedChildren.push(BoldBlot);
@@ -293,14 +355,6 @@ describe('Syntax', function () {
           done();
         }, HIGHLIGHT_INTERVAL + 1);
       });
-    });
-  });
-
-  describe('html', function () {
-    it('code language', function () {
-      expect(this.quill.getSemanticHTML()).toContain(
-        'data-language="javascript"',
-      );
     });
   });
 });
