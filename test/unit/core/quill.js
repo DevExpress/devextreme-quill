@@ -788,6 +788,46 @@ describe('Quill', function () {
       expect(this.quill.getSemanticHTML()).toEqual(expected);
       expect(preventDefaultCalled).toEqual(true);
     });
+
+    it('beforeinput event should be prevented if eventType=insertFromDrop and data contains table (T1216801)', function () {
+      this.quill.setSelection(0, 4);
+      let preventDefaultCalled = false;
+      const inputModule = this.quill.getModule('input');
+
+      const dataTransfer = new DataTransfer();
+      dataTransfer.setData('text/html', '<table><tr><td>text</td></tr></table>');
+      const eventArg = {
+        inputType: 'insertFromDrop',
+        data: null,
+        dataTransfer,
+        preventDefault() {
+          preventDefaultCalled = true;
+        },
+      };
+
+      inputModule.handleBeforeInput(eventArg);
+
+      expect(preventDefaultCalled).withContext('event is prevented').toEqual(true);
+    });
+
+    it('beforeinput event handling should not raise an error if dataTransfer is empty', function () {
+      this.quill.setSelection(0, 4);
+      const inputModule = this.quill.getModule('input');
+
+      const eventArg = {
+        inputType: 'deleteContentBackward',
+        data: null,
+        dataTransfer: null,
+      };
+
+      try {
+        inputModule.handleBeforeInput(eventArg);
+      } catch (e) {
+        expect(false).withContext(`"${e}" error is raised`).toBe(true);
+      } finally {
+        expect(true).withContext('no error is raised').toBe(true);
+      }
+    });
   });
 
   describe('placeholder', function () {
