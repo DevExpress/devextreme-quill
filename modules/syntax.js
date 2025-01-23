@@ -10,6 +10,7 @@ import TextBlot, { escapeText } from '../blots/text';
 import CodeBlock, { CodeBlockContainer } from '../formats/code';
 import { traverse } from './clipboard';
 import hasWindow from '../utils/has_window';
+import isVersionNotLessThan from '../utils/is_version_not_less_than';
 
 const TokenAttributor = new ClassAttributor('code-token', 'hljs', {
   scope: Scope.INLINE,
@@ -256,7 +257,15 @@ class Syntax extends Module {
     }
     const container = this.quill.root.ownerDocument.createElement('div');
     container.classList.add(CodeBlock.className);
-    container.innerHTML = this.options.hljs.highlight(language, text).value;
+
+    const highlightJsVersion = this.options.hljs.versionString;
+    if (isVersionNotLessThan(highlightJsVersion, '10.7')) {
+      // NOTE: https://github.com/highlightjs/highlight.js/issues/2277;
+      container.innerHTML = this.options.hljs.highlight(text, { language }).value;
+    } else {
+      container.innerHTML = this.options.hljs.highlight(language, text).value;
+    }
+
     return traverse(
       this.quill.scroll,
       container,
