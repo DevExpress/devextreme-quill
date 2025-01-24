@@ -287,6 +287,17 @@ describe('Syntax', function () {
       );
     });
 
+    it('should not call selection change if editor is not focused to not refocus (T1233316)', function () {
+      this.quill.setSelection(1, 1);
+      this.quill.root.blur();
+
+      const setSelectionSpy = spyOn(this.quill, 'setSelection');
+      this.quill.getModule('syntax').highlight();
+
+      expect(setSelectionSpy).not.toHaveBeenCalled();
+      setSelectionSpy.calls.reset();
+    });
+
     describe('allowedChildren', function () {
       beforeAll(function () {
         SyntaxCodeBlock.allowedChildren.push(BoldBlot);

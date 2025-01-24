@@ -238,7 +238,7 @@ class Syntax extends Module {
       container.highlight(this.highlightBlot, force);
     });
     this.quill.update(Quill.sources.SILENT);
-    if (range != null) {
+    if (range != null && this.quill.hasFocus()) {
       this.quill.setSelection(range, Quill.sources.SILENT);
     }
   }
