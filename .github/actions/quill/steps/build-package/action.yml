@@ -19,7 +19,7 @@ runs:
       run: npm pack
 
     - name: Upload package artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: quill-package
         path: devextreme-quill-0.0.0-ci.tgz

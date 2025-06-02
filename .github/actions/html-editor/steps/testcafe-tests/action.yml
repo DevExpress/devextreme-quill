@@ -57,7 +57,7 @@ runs:
 
     - name: Copy compared screenshot artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: compared-screenshots
         path: ${{ inputs.e2e-package-directory }}/artifacts/compared-screenshots/**/*
@@ -65,7 +65,7 @@ runs:
 
     - name: Copy failed test artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: failed-tests
         path: ${{ inputs.e2e-package-directory }}/artifacts/failedtests/**/*

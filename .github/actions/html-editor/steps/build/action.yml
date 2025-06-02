@@ -52,7 +52,7 @@ runs:
         7z a -tzip -mx3 -mmt2 devextreme-artifact.zip artifacts ../devextreme-scss/scss/bundles
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: devextreme-artifact-${{ inputs.branch }}
         path: ${{ inputs.devextreme-package-directory }}/devextreme-artifact.zip
