@@ -80,7 +80,7 @@ jobs:
 
   testcafe:
     needs: [build-devextreme, set-up-branches]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     name: testcafe ${{ matrix.branch }}
     strategy:
