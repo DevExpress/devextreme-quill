@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Lint
         uses: ./.github/actions/quill/steps/lint
@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build
         uses: ./.github/actions/quill/steps/build
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Unit tests
         uses: ./.github/actions/quill/steps/unit-tests
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Functional tests
         uses: ./.github/actions/quill/steps/functional-tests

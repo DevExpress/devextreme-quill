@@ -38,9 +38,9 @@ runs:
         working-directory: ${{ inputs.devextreme-package-directory }}
 
     - name: Setup chrome
-      uses: ./devextreme-repo/.github/actions/setup-chrome
+      uses: browser-actions/setup-chrome@v1
       with:
-        chrome-version: '121.0.6167.160'
+        chrome-version: '133.0.6943.53'
 
     - name: Prepare localization
       shell: bash
@@ -57,7 +57,7 @@ runs:
 
     - name: Copy compared screenshot artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: compared-screenshots
         path: ${{ inputs.e2e-package-directory }}/artifacts/compared-screenshots/**/*
@@ -65,7 +65,7 @@ runs:
 
     - name: Copy failed test artifacts
       if: ${{ failure() }}
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: failed-tests
         path: ${{ inputs.e2e-package-directory }}/artifacts/failedtests/**/*

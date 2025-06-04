@@ -42,7 +42,7 @@ runs:
         restore-keys: ${{ runner.os }}-node-modules
 
     - name: Install .NET 6 SDK
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
 
@@ -52,7 +52,7 @@ runs:
       run: npm install --no-audit --no-fund
 
     - name: Download quill ci package
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: quill-package
         path: ${{ inputs.devextreme-package-directory }}
