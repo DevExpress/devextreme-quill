@@ -1537,4 +1537,92 @@ describe('Table Module', function () {
       });
     });
   });
+
+  describe('cell formats retrieval', function () {
+    beforeEach(function () {
+      const tableHTML = `
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <p>First line</p>
+                <p>Second line</p>
+                <p>Third line</p>
+              </td>
+              <td>
+                <p>Second cell line</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      `;
+      this.quill = this.initialize(Quill, tableHTML, this.container, {
+        modules: {
+          table: true,
+        },
+      });
+    });
+
+    it('should retrieve cell format when applied via method for selection', function () {
+      this.quill.setSelection(0, 0);
+      this.quill.format('cellTextAlign', 'center');
+
+      const [cellLine] = this.quill.getLine(0);
+      const cell = cellLine.parent;
+
+      const formats = cell.formats();
+      expect(formats.cellTextAlign).toBe('center');
+    });
+
+    it('should retrieve cell format when cell has the format applied via style', function () {
+      const cellNode = this.quill.root.querySelector('td');
+      cellNode.style.textAlign = 'justify';
+
+      const [cellLine] = this.quill.getLine(0);
+      const cell = cellLine.parent;
+
+      const formats = cell.formats();
+      expect(formats.cellTextAlign).toBe('justify');
+    });
+
+    it('should prioritize cell format over child element format', function () {
+      const [cellLine] = this.quill.getLine(0);
+      const cell = cellLine.parent;
+
+      const firstChild = cell.domNode.querySelector('p');
+      firstChild.setAttribute('data-celltextalign', 'left');
+
+      cell.format('cellTextAlign', 'center');
+
+      const formats = cell.formats();
+      expect(formats.cellTextAlign).toBe('center');
+    });
+
+    it('should fall back to child element format when cell has no format', function () {
+      const firstChild = this.quill.root.querySelector('td p');
+      firstChild.setAttribute('data-celltextalign', 'left');
+
+      const [cellLine] = this.quill.getLine(0);
+      const cell = cellLine.parent;
+
+      const formats = cell.formats();
+
+      expect(formats.cellTextAlign).toBe('left');
+    });
+
+    it('should retrieve format correctly even if it was applied for cell line but not the first one', function () {
+      this.quill.setSelection(12, 0); // second line
+      this.quill.format('cellTextAlign', 'center');
+
+      const [secondCellLine] = this.quill.getLine(12);
+      const cell = secondCellLine.parent;
+      const formatsFromSecondLine = cell.formats();
+      expect(formatsFromSecondLine.cellTextAlign).toBe('center');
+
+      const [firstCellLine] = this.quill.getLine(0);
+      const cellFromFirstLine = firstCellLine.parent;
+      const formatsFromFirstLine = cellFromFirstLine.formats();
+      expect(formatsFromFirstLine.cellTextAlign).toBe('center');
+    });
+  });
 });

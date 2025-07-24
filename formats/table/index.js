@@ -146,7 +146,11 @@ class BaseCell extends Container {
     }
 
     Object.keys(CELL_FORMATS).forEach((format) => {
-      const value = domNode.firstElementChild?.dataset[format.toLowerCase()];
+      const cellFormatAttributor = CELL_FORMATS[format];
+      const cellValue = cellFormatAttributor?.value(domNode);
+      const childValue = domNode.firstElementChild?.dataset[format.toLowerCase()];
+
+      const value = cellValue || childValue;
       if (value) {
         formats[format] = value;
       }
