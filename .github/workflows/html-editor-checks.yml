@@ -19,7 +19,6 @@ jobs:
         id: set-matrix
 
   build-quill:
-    needs: check-nx-token
     runs-on: devextreme-shr2
     steps:
       - name: Checkout Quill repository
