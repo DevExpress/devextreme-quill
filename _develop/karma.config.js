@@ -4,7 +4,7 @@ module.exports = (config) => {
   config.set({
     basePath: '../',
     urlRoot: '/karma/',
-    port: process.env.npm_package_config_ports_karma,
+    port: process.env.npm_package_config_ports_karma || 9876,
 
     files: [
       {
@@ -25,6 +25,11 @@ module.exports = (config) => {
 
     frameworks: ['jasmine'],
     reporters: ['progress'],
+    plugins: [
+      'karma-jasmine',
+      'karma-chrome-launcher',
+      'karma-coverage',
+    ],
     colors: true,
     autoWatch: false,
     singleRun: true,
