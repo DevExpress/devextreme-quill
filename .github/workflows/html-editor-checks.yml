@@ -8,24 +8,19 @@ on:
     branches:
       - master
 
-env:
-  DEVEXTREME_BRANCHES: '["24_1"]'
-
 jobs:
   set-up-branches:
     name: devextreme branches setup
-    runs-on: ubuntu-latest
+    runs-on: devextreme-shr2
     outputs:
       branches: ${{ steps.set-matrix.outputs.branches }}
     steps:
       - name: Setup matrix
         id: set-matrix
-        run: |
-          echo "DevExtreme branches: ${{ toJson(env.DEVEXTREME_BRANCHES) }}"
-          echo "branches=${{ toJson(env.DEVEXTREME_BRANCHES) }}" >> $GITHUB_OUTPUT
 
   build-quill:
-    runs-on: ubuntu-latest
+    needs: check-nx-token
+    runs-on: devextreme-shr2
     steps:
       - name: Checkout Quill repository
         uses: actions/checkout@v4
@@ -35,7 +30,7 @@ jobs:
 
   build-devextreme:
     needs: [build-quill, set-up-branches]
-    runs-on: ubuntu-latest
+    runs-on: devextreme-shr2
     timeout-minutes: 15
     name: build ${{ matrix.branch }}
     strategy:
@@ -57,7 +52,7 @@ jobs:
 
   qunit:
     needs: [build-devextreme, set-up-branches]
-    runs-on: ubuntu-latest
+    runs-on: devextreme-shr2
     timeout-minutes: 15
     name: qunit ${{ matrix.branch }}
     strategy:
@@ -79,9 +74,8 @@ jobs:
           test-suite: ${{ matrix.test-suite }}
 
   testcafe:
-    if: false # Fix CI with updated Ubuntu version
     needs: [build-devextreme, set-up-branches]
-    runs-on: ubuntu-latest
+    runs-on: devextreme-shr2
     timeout-minutes: 15
     name: testcafe ${{ matrix.branch }}
     strategy:
