@@ -8,18 +8,23 @@ on:
     branches:
       - master
 
+env:
+  DEVEXTREME_BRANCHES: ${{ vars.DEVEXTREME_BRANCHES || '["24_2", "25_1", "25_2"]' }}
+
 jobs:
   set-up-branches:
     name: devextreme branches setup
-    runs-on: devextreme-shr2
+    runs-on: ubuntu-latest
     outputs:
       branches: ${{ steps.set-matrix.outputs.branches }}
     steps:
       - name: Setup matrix
         id: set-matrix
+        run: |
+          echo "DevExtreme branches: ${{ toJson(env.DEVEXTREME_BRANCHES) }}"
+          echo "branches=${{ toJson(env.DEVEXTREME_BRANCHES) }}" >> $GITHUB_OUTPUT
 
   build-quill:
-    needs: check-nx-token
     runs-on: devextreme-shr2
     steps:
       - name: Checkout Quill repository
@@ -30,7 +35,7 @@ jobs:
 
   build-devextreme:
     needs: [build-quill, set-up-branches]
-    runs-on: devextreme-shr2
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     name: build ${{ matrix.branch }}
     strategy:

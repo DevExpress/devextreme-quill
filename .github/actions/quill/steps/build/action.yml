@@ -8,7 +8,7 @@ runs:
 
     - name: Build
       shell: bash
-      run: npm run build:prod
+      run: pnpm run build:prod
 
     - name: Zip artifacts
       shell: bash

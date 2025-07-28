@@ -34,6 +34,11 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 10
+
     - name: Restore npm cache
       uses: actions/cache@v4
       with:
