@@ -34,7 +34,7 @@ createTestCafe({
 
     runner.compilerOptions({
       typescript: {
-        customCompilerModulePath: './node_modules/typescript',
+        customCompilerModulePath: require.resolve('typescript'),
       },
     });
 

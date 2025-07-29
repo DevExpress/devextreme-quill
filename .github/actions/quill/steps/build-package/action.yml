@@ -8,15 +8,15 @@ runs:
 
     - name: Build
       shell: bash
-      run: npm run build:prod
+      run: pnpm run build:prod
 
     - name: Set CI package version
       shell: bash
-      run: npm version 0.0.0-ci --no-git-tag-version
+      run: pnpm version 0.0.0-ci --no-git-tag-version
 
     - name: Pack package
       shell: bash
-      run: npm pack
+      run: pnpm pack
 
     - name: Upload package artifact
       uses: actions/upload-artifact@v4
