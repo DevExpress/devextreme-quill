@@ -182,11 +182,13 @@ class Quill {
     this.container.classList.toggle('ql-disabled', !enabled);
   }
 
-  focus() {
+  focus(options = {}) {
     const { scrollTop } = this.scrollingContainer;
     this.selection.focus();
-    this.scrollingContainer.scrollTop = scrollTop;
-    this.scrollIntoView();
+    if (!options.preventScroll) {
+      this.scrollingContainer.scrollTop = scrollTop;
+      this.scrollIntoView();
+    }
   }
 
   format(name, value, source = Emitter.sources.API) {
