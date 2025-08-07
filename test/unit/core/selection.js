@@ -41,14 +41,14 @@ describe('Selection', function () {
     });
   });
 
-  describe('focusing does not trigger scroll', function () {
+  describe('focusing should not trigger scroll', function () {
     beforeEach(function () {
       this.initialize(HTMLElement, '<div></div>');
       this.selection = this.initialize(Selection, '<p>0123</p>', this.container);
       spyOn(this.selection.root, 'focus').and.callThrough();
     });
 
-    it('on focus method call', function () {
+    it('on focus method call (T1297029)', function () {
       this.selection.focus();
       expect(this.selection.root.focus).toHaveBeenCalledOnceWith({ preventScroll: true });
     });
