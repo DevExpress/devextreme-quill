@@ -357,6 +357,26 @@ describe('Editor', function () {
       expect(this.container).toEqualHTML('<p>01</p>');
     });
 
+    it('insert with a new line in the middle of formatted text (T1297584)', function () {
+      const editor = this.initialize(Editor, '<p></p>');
+
+      const delta = new Delta()
+        .insert('Red', { color: 'red', bold: true })
+        .insert('Red\nBlack', { color: 'red' });
+      editor.applyDelta(delta);
+
+      const expectedHtml = `
+        <p>
+          <strong style="color: red;">Red</strong>
+          <span style="color: red;">Red</span>
+        </p>
+        <p>
+          <span style="color: red;">Black</span>
+        </p>
+      `;
+      expect(this.container).toEqualHTML(expectedHtml);
+    });
+
     it('attributed insert', function () {
       const editor = this.initialize(Editor, '<p>0123</p>');
       editor.applyDelta(new Delta().retain(2).insert('|', { bold: true }));
@@ -730,6 +750,14 @@ describe('Editor', function () {
       });
       editor.applyDelta(new Delta().delete(4).retain(1).delete(2));
       expect(editor.scroll.domNode.innerHTML).toEqual('<p>2</p>');
+    });
+
+    it('prepending bold with a newline and unformatted text', function () {
+      const editor = this.initialize(Editor, '<p><strong>a</strong></p>');
+      editor.applyDelta(new Delta().insert('\n1'));
+      expect(this.container).toEqualHTML(
+        '<p><br></p><p>1<strong>a</strong></p>',
+      );
     });
   });
 
