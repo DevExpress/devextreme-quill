@@ -230,7 +230,9 @@ class BaseTooltip extends Tooltip {
   }
 
   restoreFocus() {
-    this.quill.focus({ preventScroll: true });
+    const { scrollTop } = this.quill.scrollingContainer;
+    this.quill.focus();
+    this.quill.scrollingContainer.scrollTop = scrollTop;
   }
 
   save() {
