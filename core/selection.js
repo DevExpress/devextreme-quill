@@ -86,7 +86,7 @@ class Selection {
 
   focus() {
     if (this.hasFocus()) return;
-    this.root.focus();
+    this.root.focus({ preventScroll: true });
     this.setRange(this.savedRange);
   }
 
@@ -318,7 +318,7 @@ class Selection {
     const selection = document.getSelection();
     if (selection == null) return;
     if (startNode != null) {
-      if (!this.hasFocus()) this.root.focus();
+      if (!this.hasFocus()) this.root.focus({ preventScroll: true });
       const { native } = this.getNativeRange() || {};
       if (
         native == null

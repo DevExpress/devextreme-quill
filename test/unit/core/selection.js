@@ -41,6 +41,24 @@ describe('Selection', function () {
     });
   });
 
+  describe('focusing should not trigger scroll', function () {
+    beforeEach(function () {
+      this.initialize(HTMLElement, '<div></div>');
+      this.selection = this.initialize(Selection, '<p>0123</p>', this.container);
+      spyOn(this.selection.root, 'focus').and.callThrough();
+    });
+
+    it('on focus method call (T1297029)', function () {
+      this.selection.focus();
+      expect(this.selection.root.focus).toHaveBeenCalledOnceWith({ preventScroll: true });
+    });
+
+    it('on setNativeRange method call', function () {
+      this.selection.setNativeRange(this.container.firstChild, 0);
+      expect(this.selection.root.focus).toHaveBeenCalledOnceWith({ preventScroll: true });
+    });
+  });
+
   describe('getRange()', function () {
     it('empty document', function () {
       const selection = this.initialize(Selection, '');
