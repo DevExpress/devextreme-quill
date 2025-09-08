@@ -74,7 +74,7 @@ runs:
     - name: Ensure husky is installed
       shell: bash
       working-directory: ${{ inputs.devextreme-scss-package-directory }}
-      run: npm install husky --no-save
+      run: npm install --global husky
 
     - name: Install css dependencies
       shell: bash
