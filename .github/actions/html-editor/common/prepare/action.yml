@@ -70,4 +70,6 @@ runs:
     - name: Install css dependencies
       shell: bash
       working-directory: ${{ inputs.devextreme-scss-package-directory }}
-      run: npm ci --ignore-scripts --cache ./.npm
+      env:
+        HUSKY: 0
+      run: npm ci --cache ./.npm
