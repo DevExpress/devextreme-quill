@@ -61,8 +61,3 @@ runs:
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: npm install devextreme-quill-0.0.0-ci.tgz
-
-    - name: Install cross-env globally
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: npx cross-env
