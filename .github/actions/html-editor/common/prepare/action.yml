@@ -60,16 +60,9 @@ runs:
     - name: Install quill ci package
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
-      env:
-        HUSKY: 0
       run: npm install devextreme-quill-0.0.0-ci.tgz
 
     - name: Install cross-env globally
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: npm install --global cross-env
-
-    - name: Install css dependencies
-      shell: bash
-      working-directory: ${{ inputs.devextreme-scss-package-directory }}
-      run: npm i --ignore-scripts --cache ./.npm
