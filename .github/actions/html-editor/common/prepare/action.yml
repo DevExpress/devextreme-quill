@@ -73,4 +73,4 @@ runs:
     - name: Install quill ci package
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
-      run: npm install devextreme-quill-0.0.0-ci.tgz
+      run: pnpm install devextreme-quill-0.0.0-ci.tgz
