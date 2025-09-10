@@ -53,7 +53,7 @@ runs:
 #        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
 #        restore-keys: ${{ runner.os }}-npm
 
-    - name: Install .NET 6 SDK
+    - name: Install .NET 6  SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
