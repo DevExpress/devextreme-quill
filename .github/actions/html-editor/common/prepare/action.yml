@@ -34,26 +34,14 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 9
-
-    - name: Restore pnpm cache
+    - name: Restore npm cache
       uses: actions/cache@v4
       with:
-        path: ./.pnpm-store
-        key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: ${{ runner.os }}-pnpm
+        path: ./.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-npm
 
-#    - name: Restore npm cache
-#      uses: actions/cache@v4
-#      with:
-#        path: ./.npm
-#        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-#        restore-keys: ${{ runner.os }}-npm
-
-    - name: Install .NET 6  SDK
+    - name: Install .NET 6 SDK
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 6.0.x
@@ -61,8 +49,7 @@ runs:
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-#      run: npm ci --no-audit --no-fund --cache ./.npm
-      run: pnpm install --frozen-lockfile --store-dir ./.pnpm-store
+      run: npm ci --no-audit --no-fund --cache ./.npm
 
     - name: Download quill ci package
       uses: actions/download-artifact@v4
@@ -73,4 +60,4 @@ runs:
     - name: Install quill ci package
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
-      run: pnpm install ./devextreme-quill-0.0.0-ci.tgz --ignore-workspace-root-check --store-dir ./.pnpm-store
+      run: npm install devextreme-quill-0.0.0-ci.tgz
