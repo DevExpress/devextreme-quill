@@ -42,7 +42,7 @@ runs:
     - name: Restore pnpm cache
       uses: actions/cache@v4
       with:
-        path: ~/.pnpm-store
+        path: ./.pnpm-store
         key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: ${{ runner.os }}-pnpm
 
@@ -62,7 +62,7 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 #      run: npm ci --no-audit --no-fund --cache ./.npm
-      run: pnpm install --frozen-lockfile
+      run: pnpm install --frozen-lockfile --store-dir ./.pnpm-store
 
     - name: Download quill ci package
       uses: actions/download-artifact@v4
