@@ -37,9 +37,9 @@ runs:
     - name: Restore npm cache
       uses: actions/cache@v4
       with:
-        path: ./node_modules
-        key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: ${{ runner.os }}-node-modules
+        path: ./.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: ${{ runner.os }}-npm
 
     - name: Install .NET 6 SDK
       uses: actions/setup-dotnet@v4
@@ -49,7 +49,7 @@ runs:
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      run: npm install --no-audit --no-fund
+      run: npm ci --no-audit --no-fund --cache ./.npm
 
     - name: Download quill ci package
       uses: actions/download-artifact@v4
@@ -61,13 +61,3 @@ runs:
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
       run: npm install devextreme-quill-0.0.0-ci.tgz
-
-    - name: Install cross-env globally
-      shell: bash
-      working-directory: ${{ inputs.working-directory }}
-      run: npm install --global cross-env
-
-    - name: Install css dependencies
-      shell: bash
-      working-directory: ${{ inputs.devextreme-scss-package-directory }}
-      run: npm install

@@ -11,7 +11,7 @@ The local development environment requires both Node.js and Ruby, along with the
 
 After installing Node.js, npm, Ruby, and bundler:
 
-    npm install
+    npm ci
     bundle install
     npm run build
 

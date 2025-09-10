@@ -5,6 +5,7 @@
 /src
 /test/functional/example/src
 *.log
+.npm/
 .idea/
 .vscode/
 .cache/
