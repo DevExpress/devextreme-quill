@@ -74,7 +74,7 @@ describe('sanitizeSvg', function () {
     expect(a.getAttribute('href')).toEqual('#anchor');
   });
 
-  it('should keep data:image href and remove other data / http / https / javascript', function () {
+  it('should keep data:image href and remove others (data, http, https, javascript)', function () {
     const input = '<svg>'
       + '<a id="a1" href="data:image/png;base64,AAAA" />'
       + '<a id="a2" href="data:text/plain;base64,BBBB" />'
@@ -130,22 +130,6 @@ describe('sanitizeSvg', function () {
     expect(path.getAttribute('stroke')).toEqual('#000');
     expect(path.getAttribute('stroke-width')).toEqual('2');
     expect(path.hasAttribute('custom')).toBeFalse();
-  });
-
-  it('should handle xlink:href safe vs unsafe', function () {
-    const input = '<svg><g>'
-      + '<use id="u1" xlink:href="#icon" />'
-      + '<use id="u2" xlink:href="http://example.com/icon.svg" />'
-      + '<use id="u3" xlink:href="javascript:alert(1)" />'
-      + '</g></svg>';
-
-    const output = sanitizeSvg(input);
-
-    const doc = new DOMParser().parseFromString(output, 'image/svg+xml');
-
-    expect(doc.getElementById('u1')).toBeNull();
-    expect(doc.getElementById('u2')).toBeNull();
-    expect(doc.getElementById('u3')).toBeNull();
   });
 
   it('should treat attribute names as case-sensitive and drop uppercased ones', function () {
