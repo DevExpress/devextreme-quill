@@ -99,23 +99,22 @@ Uploader.DEFAULTS = {
   handler(range, files, blotName) {
     const promises = files.map((file) => {
       return new Promise((resolve) => {
+        const svgType = 'image/svg+xml';
         const reader = new FileReader();
-        reader.onload = (event) => {
-          const svgType = 'image/svg+xml';
-          let { result } = event.target;
-          if (file.type === svgType) {
+        if (file.type === svgType) {
+          reader.onload = (event) => {
+            let { result } = event.target;
             result = sanitizeSvg(result);
             const blob = new Blob([result], { type: svgType });
             const blobReader = new FileReader();
             blobReader.onload = (e) => resolve(e.target.result);
             blobReader.readAsDataURL(blob);
-          } else {
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => resolve(e.target.result);
-            fileReader.readAsDataURL(file);
-          }
-        };
-        reader.readAsText(file);
+          };
+          reader.readAsText(file);
+        } else {
+          reader.onload = (event) => resolve(event.target.result);
+          reader.readAsDataURL(file);
+        }
       });
     });
     Promise.all(promises).then((images) => {
