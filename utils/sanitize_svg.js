@@ -1,4 +1,4 @@
-export const allowedTags = Object.freeze(new Set([
+export const allowedTags = Object.freeze([
   'svg',
   'a',
   'altglyph',
@@ -47,9 +47,9 @@ export const allowedTags = Object.freeze(new Set([
   'tspan',
   'view',
   'vkern',
-]));
+]);
 
-export const allowedAttributes = Object.freeze(new Set([
+export const allowedAttributes = Object.freeze([
   'accent-height',
   'accumulate',
   'additive',
@@ -242,32 +242,7 @@ export const allowedAttributes = Object.freeze(new Set([
   'xlink:title',
   'xml:space',
   'xmlns:xlink',
-]));
-
-export const bannedTags = Object.freeze(new Set([
-  'animate',
-  'color-profile',
-  'cursor',
-  'discard',
-  'font-face',
-  'font-face-format',
-  'font-face-name',
-  'font-face-src',
-  'font-face-uri',
-  'foreignobject',
-  'hatch',
-  'hatchpath',
-  'mesh',
-  'meshgradient',
-  'meshpatch',
-  'meshrow',
-  'missing-glyph',
-  'script',
-  'set',
-  'solidcolor',
-  'unknown',
-  'use',
-]));
+]);
 
 function isSafeUrl(value) {
   if (!value) return false;
@@ -298,7 +273,7 @@ function isSafeUrl(value) {
 function sanitizeNode(node) {
   const tagName = node.tagName.toLowerCase();
 
-  if (bannedTags.has(tagName) || !allowedTags.has(tagName)) {
+  if (!allowedTags.includes(tagName)) {
     node.remove();
     return;
   }
@@ -306,7 +281,7 @@ function sanitizeNode(node) {
   [...node.attributes].forEach((attr) => {
     const { name, value } = attr;
 
-    if (!allowedAttributes.has(name)) {
+    if (!allowedAttributes.includes(name)) {
       node.removeAttribute(name);
       return;
     }
