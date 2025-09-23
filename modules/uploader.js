@@ -2,6 +2,7 @@ import Delta from 'quill-delta';
 import Emitter from '../core/emitter';
 import Module from '../core/module';
 import hasWindow from '../utils/has_window';
+import sanitizeSvg from '../utils/sanitize_svg';
 
 class Uploader extends Module {
   constructor(quill, options) {
@@ -99,10 +100,22 @@ Uploader.DEFAULTS = {
     const promises = files.map((file) => {
       return new Promise((resolve) => {
         const reader = new FileReader();
-        reader.onload = (e) => {
-          resolve(e.target.result);
+        reader.onload = (event) => {
+          const svgType = 'image/svg+xml';
+          let { result } = event.target;
+          if (file.type === svgType) {
+            result = sanitizeSvg(result);
+            const blob = new Blob([result], { type: svgType });
+            const blobReader = new FileReader();
+            blobReader.onload = (e) => resolve(e.target.result);
+            blobReader.readAsDataURL(blob);
+          } else {
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => resolve(e.target.result);
+            fileReader.readAsDataURL(file);
+          }
         };
-        reader.readAsDataURL(file);
+        reader.readAsText(file);
       });
     });
     Promise.all(promises).then((images) => {
