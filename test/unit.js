@@ -33,7 +33,6 @@ import './unit/modules/table_lite';
 import './unit/modules/table_main';
 import './unit/modules/uploader';
 
-import './unit/utils/is_equal';
 import './unit/utils/sanitize_svg';
 
 // Syntax version will otherwise be registered
