@@ -40,7 +40,7 @@ runs:
       run: npm install --no-audit --no-fund
 
     - name: Download quill ci package
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: quill-package
         path: ${{ inputs.working-directory }}
