@@ -34,6 +34,11 @@ runs:
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
         restore-keys: ${{ runner.os }}-node-modules
 
+    - name: Install .NET 6 SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.working-directory }}
