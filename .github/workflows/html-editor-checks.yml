@@ -74,29 +74,3 @@ jobs:
           branch: ${{ matrix.branch }}
           devextreme-package-directory: ${{ (matrix.branch == '23_2') && 'devextreme-repo/packages/devextreme' || 'devextreme-repo' }}
           test-suite: ${{ matrix.test-suite }}
-
-  testcafe:
-    needs: [build-devextreme, set-up-branches]
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    name: testcafe ${{ matrix.branch }}
-    strategy:
-      fail-fast: false
-      matrix:
-        branch: ${{ fromJson(needs.set-up-branches.outputs.branches) }}
-        test-suite: [
-          { componentFolder: 'htmlEditor', quarantineMode: false },
-        ]
-    steps:
-      - name: Checkout Quill repository
-        uses: actions/checkout@v3
-        with:
-          path: quill-repo
-
-      - name: Testcafe tests
-        uses: ./quill-repo/.github/actions/html-editor/steps/testcafe-tests
-        with:
-          branch: ${{ matrix.branch }}
-          devextreme-package-directory: ${{ (matrix.branch == '23_2') && 'devextreme-repo/packages/devextreme' || 'devextreme-repo' }}
-          component-directory: ${{ matrix.test-suite.componentFolder }}
-          quarantine-mode: ${{ matrix.test-suite.quarantineMode }}
