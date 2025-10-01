@@ -33,6 +33,8 @@ import './unit/modules/table_lite';
 import './unit/modules/table_main';
 import './unit/modules/uploader';
 
+import './unit/utils/sanitize_svg';
+
 // Syntax version will otherwise be registered
 Quill.register(CodeBlockContainer, true);
 Quill.register(CodeBlock, true);
