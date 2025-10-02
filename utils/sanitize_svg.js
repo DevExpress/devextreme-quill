@@ -281,17 +281,19 @@ function sanitizeNode(node) {
   [...node.attributes].forEach((attr) => {
     const { name, value } = attr;
 
-    if (!allowedAttributes.includes(name)) {
+    const normalizedName = name.toLowerCase();
+
+    if (!allowedAttributes.includes(normalizedName)) {
       node.removeAttribute(name);
       return;
     }
 
-    if (name.startsWith('on')) {
+    if (normalizedName.startsWith('on')) {
       node.removeAttribute(name);
       return;
     }
 
-    if ((name === 'href' || name === 'xlink:href') && !isSafeUrl(value)) {
+    if ((normalizedName === 'href' || normalizedName === 'xlink:href') && !isSafeUrl(value)) {
       node.removeAttribute(name);
     }
   });
