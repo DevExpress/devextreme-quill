@@ -132,20 +132,19 @@ describe('sanitizeSvg', function () {
     expect(path.hasAttribute('custom')).toBeFalse();
   });
 
-  it('should treat attribute names as case-sensitive and drop uppercased ones', function () {
-    const input = '<svg><circle CX="10" cy="11" R="5" r="6" FILL="red" fill="blue"></circle></svg>';
+  it('should treat tag names case-insensitively and remove banned tags regardless of case', function () {
+    const input = '<svg viewBox="0 1 2 3"><SCRIPT>alert(1)</SCRIPT><ScRiPt>alert(2)</ScRiPt></svg>';
 
     const output = sanitizeSvg(input);
 
     const doc = new DOMParser().parseFromString(output, 'image/svg+xml');
-    const circle = doc.querySelector('circle');
+    const svg = doc.documentElement;
+    const script1 = doc.querySelector('SCRIPT');
+    const script2 = doc.querySelector('ScRiPt');
 
-    expect(circle.hasAttribute('CX')).toBeFalse();
-    expect(circle.getAttribute('cy')).toEqual('11');
-    expect(circle.hasAttribute('R')).toBeFalse();
-    expect(circle.getAttribute('r')).toEqual('6');
-    expect(circle.hasAttribute('FILL')).toBeFalse();
-    expect(circle.getAttribute('fill')).toEqual('blue');
+    expect(svg.getAttribute('viewBox')).toEqual('0 1 2 3');
+    expect(script1).toBeNull();
+    expect(script2).toBeNull();
   });
 
   it('should return null for empty or whitespace-only input', function () {
