@@ -70,7 +70,7 @@
     "stylus": "^0.59.0",
     "stylus-loader": "^7.1.0",
     "terser-webpack-plugin": "^5.3.6",
-    "testcafe": "^3.4.0",
+    "testcafe": "^3.7.2",
     "ts-loader": "^9.4.1",
     "typescript": "^4.8.4",
     "wait-on": "^7.2.0",
