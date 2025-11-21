@@ -106,6 +106,9 @@
     "test:coverage": "webpack --env coverage --config _develop/webpack.config.js && karma start _develop/karma.config.js --reporters coverage",
     "version": "npm version --no-git-tag-version"
   },
+  "overrides": {
+    "ws": "^8.18.3"
+  },
   "keywords": [
     "editor",
     "rich text",
