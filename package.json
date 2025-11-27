@@ -107,7 +107,8 @@
     "version": "npm version --no-git-tag-version"
   },
   "overrides": {
-    "ws": "^8.18.3"
+    "ws": "^8.18.3",
+    "node-forge": "^1.3.2"
   },
   "keywords": [
     "editor",
