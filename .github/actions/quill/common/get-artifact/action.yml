@@ -1,5 +1,8 @@
 name: Quill get artifact
 description: Downloads Quill's build artifact and unarchive it
+inputs:
+  working-directory:
+    description: Quill repo directory
 runs:
   using: composite
   steps:
@@ -7,7 +10,9 @@ runs:
       uses: actions/download-artifact@v4
       with:
         name: quill-artifact
+        path: ${{ inputs.working-directory }}
 
     - name: Unpack artifact
       shell: bash
+      working-directory: ${{ inputs.working-directory }}
       run: 7z x quill-artifact.zip

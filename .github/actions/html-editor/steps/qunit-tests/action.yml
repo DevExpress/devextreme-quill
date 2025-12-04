@@ -35,21 +35,15 @@ runs:
         branch: ${{ inputs.branch }}
         working-directory: ${{ inputs.devextreme-package-directory }}
 
-    - name: Test
+    - name: Download quill artifact
+      uses: ./quill-repo/.github/actions/quill/common/get-artifact
+      with:
+        working-directory: ./quill-repo
+
+    - name: Link devextreme-quill to global
       shell: bash
       working-directory: ./quill-repo
-      run: |
-        pwd
-        ls
-        npm link
-
-#    - name: Download quill artifact
-#      uses: ./quill-repo/.github/actions/quill/common/get-artifact
-#
-#    - name: Link quill artifact to global
-#      shell: bash
-#      working-directory: dist
-#      run: npm link
+      run: npm link
 
     - name: Link devextreme-quill to monorepo
       shell: bash
