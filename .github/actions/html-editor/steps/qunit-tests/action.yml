@@ -41,12 +41,12 @@ runs:
     - name: Link quill artifact to global
       shell: bash
       working-directory: dist
-      run: pnpm link --global
+      run: npm link
 
     - name: Link devextreme-quill to monorepo
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
-      run: pnpm link devextreme-quill
+      run: npm link devextreme-quill
 
     - name: Build dotnet
       shell: bash
