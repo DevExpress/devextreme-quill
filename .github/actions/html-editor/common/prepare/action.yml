@@ -50,11 +50,3 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: npm ci --no-audit --no-fund --cache ./.npm
-
-    - name: Download quill artifact
-      uses: ./quill-repo/.github/actions/quill/common/get-artifact/action.yml
-
-    - name: Install quill ci package
-      shell: bash
-      working-directory: ${{ inputs.devextreme-package-directory }}
-      run: npm link devextreme-quill
