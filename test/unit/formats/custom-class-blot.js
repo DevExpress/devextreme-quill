@@ -64,4 +64,23 @@ describe('Custom class/data blots', function () {
 
     expect(ClassBlock.formats(span)).toBe(false);
   });
+
+  it('Custom inline tag (<i>): create() and formats() work correctly', function () {
+    const ItalicBlot = createClassDataBlot(InlineBlot, 'I');
+    ItalicBlot.tagName = 'I';
+
+    const node = ItalicBlot.create({
+      customClass: 'testClass',
+      customData: 'testData',
+    });
+
+    expect(node.outerHTML).toEqualHTML(
+      '<i class="testClass" data-test="testData"></i>',
+    );
+
+    expect(ItalicBlot.formats(node)).toEqual({
+      customClass: 'testClass',
+      customData: 'testData',
+    });
+  });
 });
