@@ -45,7 +45,7 @@ runs:
     - name: Prepare localization
       shell: bash
       working-directory: ${{ inputs.devextreme-package-directory }}
-      run: npx gulp localization
+      run: npx --no-install gulp localization
 
     - name: Run TestCafe tests
       shell: bash
