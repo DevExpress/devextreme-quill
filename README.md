@@ -37,7 +37,7 @@ In comparison with the original library, **DevExtreme Quill** supports basic tab
 
 ## Download
 
-- [npm](https://www.npmjs.com/package/devextreme-quill) - `npm install devextreme-quill`
+- [npm](https://www.npmjs.com/package/devextreme-quill) - `pnpm install devextreme-quill`
 - tar - https://github.com/DevExpress/DevExtreme-quill/releases
 
 

@@ -11,8 +11,8 @@ runs:
 
     - name: Copy dist
       shell: bash
-      run: npm run copy-dist
+      run: pnpm run copy-dist
 
     - name: Run functional tests
       shell: bash
-      run: npm run test:functional -- --browsers="chrome:headless"
+      run: pnpm run test:functional -- --browsers="chrome:headless"
