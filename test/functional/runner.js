@@ -34,7 +34,11 @@ createTestCafe({
 
     runner.compilerOptions({
       typescript: {
-        customCompilerModulePath: './node_modules/typescript',
+        customCompilerModulePath: '../typescript',
+        options: {
+          skipLibCheck: true,
+          types: [],
+        },
       },
     });
 

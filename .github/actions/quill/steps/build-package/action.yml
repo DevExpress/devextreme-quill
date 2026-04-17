@@ -8,7 +8,7 @@ runs:
 
     - name: Build
       shell: bash
-      run: npm run build:prod
+      run: pnpm run build:prod
 
     - name: Set CI package version
       shell: bash
@@ -16,7 +16,7 @@ runs:
 
     - name: Pack package
       shell: bash
-      run: npm pack
+      run: pnpm pack
 
     - name: Upload package artifact
       uses: actions/upload-artifact@v4

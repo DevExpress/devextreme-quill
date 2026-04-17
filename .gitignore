@@ -5,6 +5,7 @@
 /src
 /test/functional/example/src
 *.log
+pnpm-debug.log
 .npm/
 .idea/
 .vscode/
