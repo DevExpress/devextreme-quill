@@ -111,8 +111,8 @@ importers:
         specifier: ^1.2.8
         version: 1.2.8
       nconf:
-        specifier: ^0.12.1
-        version: 0.12.1
+        specifier: ^0.13.0
+        version: 0.13.0
       ncp:
         specifier: ^2.0.0
         version: 2.0.0
@@ -3979,8 +3979,8 @@ packages:
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
 
-  nconf@0.12.1:
-    resolution: {integrity: sha512-p2cfF+B3XXacQdswUYWZ0w6Vld0832A/tuqjLBu3H1sfUcby4N2oVbGhyuCkZv+t3iY3aiFEj7gZGqax9Q2c1w==}
+  nconf@0.13.0:
+    resolution: {integrity: sha512-hJ/u2xCpA663h6xyOiztx3y+lg9eU0rdkwJ+c4FtiHo2g/gB0sjXtW31yTdMLWLOIj1gL2FcJMwfOqouuUK/Wg==}
     engines: {node: '>= 0.4.0'}
 
   ncp@2.0.0:
@@ -5384,6 +5384,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   vary@1.1.2:
@@ -10224,7 +10225,7 @@ snapshots:
 
   natural-compare@1.4.0: {}
 
-  nconf@0.12.1:
+  nconf@0.13.0:
     dependencies:
       async: 3.2.6
       ini: 2.0.0

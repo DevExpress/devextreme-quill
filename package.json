@@ -63,7 +63,7 @@
     "lodash": "^4.17.21",
     "mini-css-extract-plugin": "^2.6.1",
     "minimist": "^1.2.8",
-    "nconf": "^0.12.1",
+    "nconf": "^0.13.0",
     "ncp": "^2.0.0",
     "rimraf": "^3.0.2",
     "source-map-loader": "^4.0.1",
