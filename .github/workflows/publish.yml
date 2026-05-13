@@ -10,12 +10,10 @@ on:
       dry-run:
         description: 'Run in dry-run mode (no actual publish)'
         type: boolean
-        default: false  
+        default: false
 
 permissions:
-  actions: write
   contents: read
-  deployments: write
   id-token: write
 
 jobs:
