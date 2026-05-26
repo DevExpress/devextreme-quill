@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Build package
         uses: ./.github/actions/quill/steps/build
@@ -44,7 +44,7 @@ jobs:
         branch: ${{ fromJson(needs.set-up-branches.outputs.branches) }}
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: quill-repo
 
@@ -67,7 +67,7 @@ jobs:
         test-suite: [ui.htmlEditor]
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: quill-repo
 
