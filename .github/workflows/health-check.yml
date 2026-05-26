@@ -13,3 +13,10 @@ jobs:
   invoke:
     name: Invoke
     uses: DevExpress/github-actions/.github/workflows/repository-check.yml@repository-check
+    with:
+      config: |
+        {
+          ignoredAdvisories: [
+            'GHSA-2gmp-34j9-fqjm', // replicator
+          ]
+        }
