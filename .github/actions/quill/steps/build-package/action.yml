@@ -19,7 +19,7 @@ runs:
       run: pnpm pack
 
     - name: Upload package artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: quill-package
         path: devextreme-quill-0.0.0-ci.tgz
