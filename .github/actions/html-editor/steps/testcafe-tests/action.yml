@@ -38,7 +38,7 @@ runs:
         working-directory: ${{ inputs.devextreme-package-directory }}
 
     - name: Setup chrome
-      uses: browser-actions/setup-chrome@v1
+      uses: browser-actions/setup-chrome@v2
       with:
         chrome-version: '133.0.6943.53'
 
