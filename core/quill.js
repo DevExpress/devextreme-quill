@@ -472,10 +472,10 @@ Quill.version = typeof QUILL_VERSION === 'undefined' ? 'dev' : QUILL_VERSION;
 Quill.MS_LIST_DATA_KEY = 'mso-list-data';
 
 Quill.replaceStyleAttribute = (html) => {
-  const tagAttrsRegex = /(?:(<[a-z0-9]+\s*))([\s\S]*?)(>|\/>)/gi;
+  const tagAttrsRegex = /(<[a-z0-9]+)([^>]*)(>)/gi;
 
   return html.replace(tagAttrsRegex, (allTagAttrs, tagStart, tagAttrs, tagEnd) => {
-    const contentWithoutStyle = tagAttrs.replace(/style\s*=/gi, `${STYLE_ATTRIBUTE_KEY}=`);
+    const contentWithoutStyle = tagAttrs.replace(/style\s{0,10}=/gi, `${STYLE_ATTRIBUTE_KEY}=`);
 
     return tagStart + contentWithoutStyle + tagEnd;
   });
