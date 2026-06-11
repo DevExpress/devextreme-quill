@@ -40,9 +40,9 @@ jobs:
           pnpm set //npm.pkg.github.com/:_authToken="$NODE_AUTH_TOKEN"
           cd tools/make-sbom && pnpm install --frozen-lockfile && pnpm run make-sbom-hashed
 
-      # - name: Break SBOMs
-      #   run: |
-      #     jq '.specVersion += "aaa"' tools/make-sbom/dist/devextreme-quill.cdx.json > t && mv t tools/make-sbom/dist/devextreme-quill.cdx.json
+      - name: Break SBOMs
+        run: |
+          jq '.specVersion += "aaa"' tools/make-sbom/dist/devextreme-quill.cdx.json > t && mv t tools/make-sbom/dist/devextreme-quill.cdx.json
 
       - name: Validate SBOMs
         uses: mpreyskurantov/github-actions/validate-sbom@adcd7cdfb78f01e2e11678673def84ab367ddd25
