@@ -1,30 +1,21 @@
-name: Publish
+name: SBOM
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: true
-        description: Publishing version (tag name)
-      dry-run:
-        description: 'Run in dry-run mode (no actual publish)'
-        type: boolean
-        default: false
+  push:
+    branches:
+      - sbom-dev
 
 permissions:
   contents: read
-  id-token: write
+  packages: read
 
 jobs:
-  publish:
+  build:
+    if: ${{ github.event_name == 'push' && github.ref_type == 'branch' && github.ref_name == 'sbom-dev' }}
     runs-on: ubuntu-latest
-    environment: npmjs
     steps:
       - name: Checkout Quill repository
         uses: actions/checkout@v6
-        with:
-          ref: ${{ inputs.version }}
 
       - name: Build
         uses: ./.github/actions/quill/steps/build
@@ -64,13 +55,3 @@ jobs:
           name: sbom
           path: tools/make-sbom/dist
           retention-days: 2
-
-      - name: Publish to NPM
-        run: pnpm publish "$PACKAGE_TGZ" --provenance ${{ inputs['dry-run'] && '--dry-run' || '' }}
-
-      - name: Setup NPM tags
-        if: ${{ !inputs['dry-run'] }}
-        run: |
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 24_1
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 24_2
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 25_1
