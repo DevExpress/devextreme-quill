@@ -36,7 +36,7 @@ jobs:
 
       - name: Pack
         run: |
-          package_tgz=$(pnpm pack --json | jq -er '.filename')
+          package_tgz=$(pnpm pack --json | jq -er 'if type=="array" then .[0].filename else .filename end')
           echo "PACKAGE_TGZ=$package_tgz" >> "$GITHUB_ENV"
 
       - name: Publish to NPM
