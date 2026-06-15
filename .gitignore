@@ -1,5 +1,7 @@
-/dist
-/node_modules
+dist
+node_modules
+*.tgz
+*.zip
 /selenium
 /docs/_site
 /src
