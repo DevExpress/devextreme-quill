@@ -11,6 +11,7 @@ overrides:
   brace-expansion@>=5.0.0 <5.0.6: ^5.0.6
   uuid@<11.1.1: ^11.1.1
   qs@>=6.11.1 <=6.15.1: ^6.15.2
+  shell-quote@>=1.1.0 <=1.8.3: ^1.8.4
 
 allowBuilds:
   core-js: true
