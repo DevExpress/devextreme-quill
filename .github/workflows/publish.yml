@@ -64,7 +64,7 @@ jobs:
           retention-days: 14
 
       - name: Validate SBOM
-        uses: mpreyskurantov/github-actions/validate-sbom@sbom-val-dev
+        uses: DevExpress/github-actions/validate-sbom@5034a6d5e0fd18fc2826ed20a5140f9c83b8994f
         with:
           input-file: tools/make-sbom/dist/devextreme-quill.cdx.json
 

@@ -53,12 +53,8 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-      # - name: Break SBOM
-      #   run: |
-      #     jq '.specVersion += "aaa"' tools/make-sbom/dist/devextreme-quill.cdx.json > t && mv t tools/make-sbom/dist/devextreme-quill.cdx.json
-
       - name: Validate SBOM
-        uses: mpreyskurantov/github-actions/validate-sbom@sbom-val-dev
+        uses: DevExpress/github-actions/validate-sbom@5034a6d5e0fd18fc2826ed20a5140f9c83b8994f
         with:
           input-file: tools/make-sbom/dist/devextreme-quill.cdx.json
 
