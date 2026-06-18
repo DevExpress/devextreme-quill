@@ -21,7 +21,7 @@ importers:
   .:
     dependencies:
       core-js:
-        specifier: ^3.34.0
+        specifier: ^3.49.0
         version: 3.49.0
       eventemitter3:
         specifier: ^4.0.7
