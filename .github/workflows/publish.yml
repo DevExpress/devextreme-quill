@@ -1,30 +1,22 @@
 name: Publish
 
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: true
-        description: Publishing version (tag name)
-      dry-run:
-        description: 'Run in dry-run mode (no actual publish)'
-        type: boolean
-        default: false
+  push:
+    branches:
+      - ci-dry-run-git-status
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: npmjs
     steps:
       - name: Checkout Quill repository
         uses: actions/checkout@v6
         with:
-          ref: ${{ inputs.version }}
+          ref: refs/heads/master
+          fetch-depth: 0
 
       - name: Build
         uses: ./.github/actions/quill/steps/build
@@ -39,12 +31,10 @@ jobs:
           package_tgz=$(pnpm pack --json | jq -er 'if type=="array" then .[0].filename else .filename end')
           echo "PACKAGE_TGZ=$package_tgz" >> "$GITHUB_ENV"
 
-      - name: Publish to NPM
-        run: pnpm publish "$PACKAGE_TGZ" --provenance ${{ inputs['dry-run'] && '--dry-run' || '' }}
-
-      - name: Setup NPM tags
-        if: ${{ !inputs['dry-run'] }}
+      - name: Git Status
         run: |
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 24_1
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 24_2
-          npm dist-tag add devextreme-quill@${{ inputs.version }} 25_1
+          git branch --show-current
+          git status
+
+      - name: Publish to NPM (dry-run)
+        run: pnpm publish "$PACKAGE_TGZ" --dry-run --publish-branch master
