@@ -14,6 +14,7 @@ runs:
       shell: bash
       run: |
         7z a -tzip -mx3 -mmt2 quill-artifact.zip dist
+
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
