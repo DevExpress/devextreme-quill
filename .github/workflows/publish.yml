@@ -40,7 +40,7 @@ jobs:
           echo "PACKAGE_TGZ=$package_tgz" >> "$GITHUB_ENV"
 
       - name: Publish to NPM
-        run: pnpm publish "$PACKAGE_TGZ" --provenance ${{ inputs['dry-run'] && '--dry-run' || '' }}
+        run: pnpm publish "$PACKAGE_TGZ" --provenance --no-git-checks ${{ inputs['dry-run'] && '--dry-run' || '' }}
 
       - name: Setup NPM tags
         if: ${{ !inputs['dry-run'] }}
