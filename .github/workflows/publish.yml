@@ -14,13 +14,12 @@ on:
 
 permissions:
   contents: read
-  packages: read
+  packages: write
   id-token: write
 
 jobs:
-  publish:
+  build:
     runs-on: ubuntu-latest
-    environment: npmjs
     steps:
       - name: Checkout Quill repository
         uses: actions/checkout@v6
@@ -46,7 +45,6 @@ jobs:
           name: package
           path: ${{ env.PACKAGE_TGZ }}
           if-no-files-found: error
-          retention-days: 14
 
       - name: Build SBOM
         env:
@@ -55,21 +53,47 @@ jobs:
           pnpm set //npm.pkg.github.com/:_authToken="$NODE_AUTH_TOKEN"
           cd tools/make-sbom && pnpm install --frozen-lockfile && pnpm dx-make-sbom ../../ dist/ "devextreme-quill($PACKAGE_TGZ)"
 
-      - name: Upload SBOM
-        uses: actions/upload-artifact@v7
-        with:
-          name: sbom
-          path: tools/make-sbom/dist
-          if-no-files-found: error
-          retention-days: 14
-
       - name: Validate SBOM
         uses: DevExpress/github-actions/validate-sbom@5034a6d5e0fd18fc2826ed20a5140f9c83b8994f
         with:
           input-file: tools/make-sbom/dist/devextreme-quill.cdx.json
 
+      - name: Publish SBOM to npm.pkg.github.com
+        run: |
+          version="$(pnpm pkg get version | tr -d '"')"
+          mkdir -p tools/make-sbom/pack && cp tools/make-sbom/dist/devextreme-quill.cdx.json tools/make-sbom/pack/
+          jq -n --arg v "$version" '{name:"@devexpress/devextreme-quill-sbom",version:$v}' > tools/make-sbom/pack/package.json
+          cd tools/make-sbom/pack
+          pnpm publish --registry https://npm.pkg.github.com --no-git-checks
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: npmjs
+    steps:
+      - name: Checkout Quill repository
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.node-version'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Download package
+        uses: actions/download-artifact@v7
+        with:
+          name: package
+          path: package
+
       - name: Publish to NPM
-        run: pnpm publish "$PACKAGE_TGZ" --provenance --no-git-checks ${{ inputs['dry-run'] && '--dry-run' || '' }}
+        run: |
+          package_tgz=$(ls package/*.tgz)
+          pnpm publish "$package_tgz" --provenance --no-git-checks ${{ inputs['dry-run'] && '--dry-run' || '' }}
 
       - name: Setup NPM tags
         if: ${{ !inputs['dry-run'] }}
