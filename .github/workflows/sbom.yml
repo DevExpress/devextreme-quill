@@ -1,6 +1,10 @@
 name: SBOM
 
 on:
+  push:
+    branches:
+      - master
+      - sbom-dev
   workflow_dispatch:
 
 permissions:
@@ -9,6 +13,7 @@ permissions:
 
 jobs:
   sbom:
+    if: ${{ github.ref_name == 'sbom-dev' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Quill repository
