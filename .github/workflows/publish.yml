@@ -12,17 +12,18 @@ on:
         type: boolean
         default: false
 
-permissions:
-  contents: read
-  packages: write
-  id-token: write
+permissions: {}
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      packages: write
+
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.version }}
 
@@ -46,33 +47,42 @@ jobs:
           path: ${{ env.PACKAGE_TGZ }}
           if-no-files-found: error
 
+      - name: Set GitHub Packages auth
+        run: pnpm set //npm.pkg.github.com/:_authToken='${NODE_AUTH_TOKEN}'
+
       - name: Build SBOM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pnpm set //npm.pkg.github.com/:_authToken="$NODE_AUTH_TOKEN"
-          cd tools/make-sbom && pnpm install --frozen-lockfile && pnpm dx-make-sbom ../../ dist/ "devextreme-quill($PACKAGE_TGZ)"
+          cd tools/make-sbom
+          pnpm install --frozen-lockfile
+          pnpm dx-make-sbom ../../ dist/ "devextreme-quill($PACKAGE_TGZ)"
 
       - name: Validate SBOM
         uses: DevExpress/github-actions/validate-sbom@5034a6d5e0fd18fc2826ed20a5140f9c83b8994f
         with:
           input-file: tools/make-sbom/dist/devextreme-quill.cdx.json
 
-      - name: Publish SBOM to npm.pkg.github.com
+      - name: Publish SBOM to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           version="$(pnpm pkg get version | tr -d '"')"
           mkdir -p tools/make-sbom/pack && cp tools/make-sbom/dist/devextreme-quill.cdx.json tools/make-sbom/pack/
-          jq -n --arg v "$version" '{name:"@devexpress/devextreme-quill-sbom",version:$v}' > tools/make-sbom/pack/package.json
+          jq -n --arg v "$version" '{name:"@devexpress/devextreme-quill-sbom",version:$v,publishConfig:{registry:"https://npm.pkg.github.com"}}' > tools/make-sbom/pack/package.json
           cd tools/make-sbom/pack
-          pnpm publish --registry https://npm.pkg.github.com --no-git-checks
+          pnpm publish --no-git-checks
 
   publish:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-slim
     environment: npmjs
+    permissions:
+      id-token: write  # Required for OIDC (Trusted Publishing)
+      contents: read
     steps:
       - name: Checkout Quill repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ inputs.version }}
 
@@ -82,7 +92,6 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version-file: '.node-version'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Download package
         uses: actions/download-artifact@v7
