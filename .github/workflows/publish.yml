@@ -80,6 +80,7 @@ jobs:
     permissions:
       id-token: write  # Required for OIDC (Trusted Publishing)
       contents: read
+
     steps:
       - name: Checkout Quill repository
         uses: actions/checkout@v7
