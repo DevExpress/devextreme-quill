@@ -29,7 +29,7 @@ test('Shift+Tab in plain text moves focus to the previous element instead of bei
     .typeText(editor, 'Test')
     .pressKey('shift+tab')
     .expect(getActiveElementId())
-    .eql('updateSelection')
+    .eql('before-editor')
     .expect(editor.innerHTML)
     .eql('<p>Test</p>');
 });
