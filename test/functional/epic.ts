@@ -28,7 +28,6 @@ test('compose an epic', async (t) => {
     .expect(editor.innerHTML)
     .eql('<p>The Whale</p><p><br></p>')
     .pressKey('enter')
-    .pressKey('tab')
     .typeText('.ql-editor', P1)
     .pressKey('enter')
     .pressKey('enter')
@@ -38,7 +37,7 @@ test('compose an epic', async (t) => {
       [
         '<p>The Whale</p>',
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -57,7 +56,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -80,7 +79,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -98,7 +97,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -111,7 +110,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -125,7 +124,7 @@ test('compose an epic', async (t) => {
         '<p><strong><em><span class="ql-cursor">\uFEFF</span></em></strong></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -138,7 +137,7 @@ test('compose an epic', async (t) => {
         '<p><strong><em>Moby Dick</em></strong></p>',
         `<p>${CHAPTER}</p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -153,7 +152,7 @@ test('compose an epic', async (t) => {
         '<p><strong><em>Moby Dick</em></strong></p>',
         `<p><strong>${CHAPTER}</strong></p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -167,7 +166,7 @@ test('compose an epic', async (t) => {
         '<h1><strong><em>Moby Dick</em></strong></h1>',
         `<p><strong>${CHAPTER}</strong></p>`,
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -191,7 +190,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         '<p>ABA</p>',
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -209,7 +208,7 @@ test('compose an epic', async (t) => {
         '<p><br></p>',
         '<p>AB<strong>C</strong>DA</p>',
         '<p><br></p>',
-        `<p>\t${P1}</p>`,
+        `<p>${P1}</p>`,
         '<p><br></p>',
         `<p>${P2}</p>`,
       ],
@@ -237,7 +236,7 @@ test('compose an epic', async (t) => {
   await t.expect(actualWindowScrollY)
     .gte(windowScrollY);
 
-  await t.click('#updatSelection')
+  await t.click('#updateSelection')
     .pressKey('enter');
 
   const updatedWindowScrollY = await editor.scrollTop;

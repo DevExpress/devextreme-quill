@@ -16,16 +16,19 @@
         <button id="header">Header</button>
         <button id="embed">Insert embed</button>
         <button id="content">Insert much more content</button>
-        <button id="updatSelection">Update selection</button>
+        <button id="updateSelection">Update selection</button>
+        <button id="before-editor">Before</button>
 
         <div id="editor"></div>
+
+        <button id="after-editor">After</button>
     </div>
 </body>
 
 <script>
     const editorElem = document.getElementById('editor');
     const editor = new DevExpress.Quill(editorElem);
-    
+
     ['bold', 'italic', 'header'].forEach((formatName) => {
         const value = formatName === 'header' ? 1 : true;
         document
@@ -46,7 +49,7 @@
                     return node;
                 }
             }
-            Hashtag.blotName = 'hashtag'; 
+            Hashtag.blotName = 'hashtag';
             Hashtag.tagName = 'span';
 
             DevExpress.Quill.register({
@@ -79,7 +82,7 @@
             });
 
         document
-            .getElementById('updatSelection')
+            .getElementById('updateSelection')
             .addEventListener('click', () => {
                 editor.focus();
                 editor.setSelection(0, 0);
