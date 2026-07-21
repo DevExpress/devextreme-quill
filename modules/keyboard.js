@@ -452,6 +452,15 @@ Keyboard.DEFAULTS = {
     },
     'indent code-block': makeCodeBlockHandler(true),
     'outdent code-block': makeCodeBlockHandler(false),
+    'remove tab': {
+      key: 'tab',
+      shiftKey: true,
+      collapsed: true,
+      prefix: /\t$/,
+      handler(range) {
+        this.quill.deleteText(range.index - 1, 1, Quill.sources.USER);
+      },
+    },
     tab: {
       key: 'tab',
       handler(range, context) {
@@ -469,15 +478,6 @@ Keyboard.DEFAULTS = {
         this.quill.history.cutoff();
         this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
         return false;
-      },
-    },
-    'remove tab': {
-      key: 'tab',
-      shiftKey: true,
-      collapsed: true,
-      prefix: /\t$/,
-      handler(range) {
-        this.quill.deleteText(range.index - 1, 1, Quill.sources.USER);
       },
     },
     'blockquote empty enter': {
