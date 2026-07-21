@@ -27,7 +27,13 @@
 
 <script>
     const editorElem = document.getElementById('editor');
-    const editor = new DevExpress.Quill(editorElem);
+    const inlineTabInsertion = new URLSearchParams(window.location.search)
+        .get('inlineTabInsertion') !== 'false';
+    const editor = new DevExpress.Quill(editorElem, {
+        modules: {
+            keyboard: { inlineTabInsertion },
+        },
+    });
 
     ['bold', 'italic', 'header'].forEach((formatName) => {
         const value = formatName === 'header' ? 1 : true;

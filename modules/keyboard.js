@@ -405,6 +405,7 @@ class Keyboard extends Module {
 }
 
 Keyboard.DEFAULTS = {
+  inlineTabInsertion: true,
   bindings: {
     bold: makeFormatHandler('bold', 66),
     italic: makeFormatHandler('italic', 73),
@@ -412,7 +413,10 @@ Keyboard.DEFAULTS = {
     indent: {
       key: 'tab',
       format: ['blockquote', 'indent', 'list'],
-      handler() {
+      handler(range, context) {
+        if (this.options.inlineTabInsertion && context.collapsed && context.offset !== 0) {
+          return true;
+        }
         this.quill.format('indent', '+1', Quill.sources.USER);
         return false;
       },
@@ -421,7 +425,10 @@ Keyboard.DEFAULTS = {
       key: 'tab',
       shiftKey: true,
       format: ['blockquote', 'indent', 'list'],
-      handler() {
+      handler(range, context) {
+        if (this.options.inlineTabInsertion && context.collapsed && context.offset !== 0) {
+          return true;
+        }
         this.quill.format('indent', '-1', Quill.sources.USER);
         return false;
       },
@@ -445,6 +452,25 @@ Keyboard.DEFAULTS = {
     },
     'indent code-block': makeCodeBlockHandler(true),
     'outdent code-block': makeCodeBlockHandler(false),
+    tab: {
+      key: 'tab',
+      handler(range, context) {
+        if (!this.options.inlineTabInsertion) return true;
+        const { format } = context;
+        const isInTable = format.tableCellLine || format.tableHeaderCellLine
+          || format.tableHeaderCell || format.table;
+        if (isInTable) return true;
+        this.quill.history.cutoff();
+        const delta = new Delta()
+          .retain(range.index)
+          .delete(range.length)
+          .insert('\t');
+        this.quill.updateContents(delta, Quill.sources.USER);
+        this.quill.history.cutoff();
+        this.quill.setSelection(range.index + 1, Quill.sources.SILENT);
+        return false;
+      },
+    },
     'remove tab': {
       key: 'tab',
       shiftKey: true,

@@ -506,8 +506,8 @@ describe('Keyboard', function () {
     });
   });
 
-  describe('plain text tab (keyboard trap fix)', function () {
-    it('should not prevent default or change content when Tab is pressed outside list/blockquote/indent/table/code-block', function () {
+  describe('inlineTabInsertion (default: true) restores the pre-fix trapping behavior', function () {
+    it('should insert a tab character and prevent default when Tab is pressed outside list/blockquote/indent/table/code-block', function () {
       const quill = this.initialize(Quill, '<p>Hello</p>', this.container);
       quill.setSelection(2);
       const keydownEvent = new KeyboardEvent('keydown', {
@@ -517,8 +517,8 @@ describe('Keyboard', function () {
 
       quill.root.dispatchEvent(keydownEvent);
 
-      expect(keydownEvent.defaultPrevented).toBe(false);
-      expect(quill.root).toEqualHTML('<p>Hello</p>');
+      expect(keydownEvent.defaultPrevented).toBe(true);
+      expect(quill.root).toEqualHTML('<p>He\tllo</p>');
     });
 
     it('should not prevent default or change content when Shift+Tab is pressed outside list/blockquote/indent/table/code-block', function () {
@@ -535,9 +535,92 @@ describe('Keyboard', function () {
       expect(keydownEvent.defaultPrevented).toBe(false);
       expect(quill.root).toEqualHTML('<p>Hello</p>');
     });
+
+    it('should indent a list item on Tab when the caret is at the start of the line', function () {
+      const quill = this.initialize(
+        Quill,
+        `
+          <ol>
+            <li data-list="ordered">One</li>
+          </ol>
+        `,
+        this.container,
+      );
+      quill.setSelection(0);
+      const keydownEvent = new KeyboardEvent('keydown', {
+        key: 'tab',
+        cancelable: true,
+      });
+
+      quill.root.dispatchEvent(keydownEvent);
+
+      expect(keydownEvent.defaultPrevented).toBe(true);
+      expect(quill.root).toEqualHTML(`
+        <ol>
+          <li data-list="ordered" class="ql-indent-1">One</li>
+        </ol>
+      `);
+    });
+
+    it('should insert a tab character instead of indenting when the caret is not at the start of the line', function () {
+      const quill = this.initialize(
+        Quill,
+        `
+          <ol>
+            <li data-list="ordered">One</li>
+          </ol>
+        `,
+        this.container,
+      );
+      quill.setSelection(2);
+      const keydownEvent = new KeyboardEvent('keydown', {
+        key: 'tab',
+        cancelable: true,
+      });
+
+      quill.root.dispatchEvent(keydownEvent);
+
+      expect(keydownEvent.defaultPrevented).toBe(true);
+      expect(quill.root).toEqualHTML(`
+        <ol>
+          <li data-list="ordered">On\te</li>
+        </ol>
+      `);
+    });
   });
 
-  describe('indent/outdent in a list without the caret-offset restriction', function () {
+  describe('inlineTabInsertion: false restores the keyboard-trap fix', function () {
+    const options = { modules: { keyboard: { inlineTabInsertion: false } } };
+
+    it('should not prevent default or change content when Tab is pressed outside list/blockquote/indent/table/code-block', function () {
+      const quill = this.initialize(Quill, '<p>Hello</p>', this.container, options);
+      quill.setSelection(2);
+      const keydownEvent = new KeyboardEvent('keydown', {
+        key: 'tab',
+        cancelable: true,
+      });
+
+      quill.root.dispatchEvent(keydownEvent);
+
+      expect(keydownEvent.defaultPrevented).toBe(false);
+      expect(quill.root).toEqualHTML('<p>Hello</p>');
+    });
+
+    it('should not prevent default or change content when Shift+Tab is pressed outside list/blockquote/indent/table/code-block', function () {
+      const quill = this.initialize(Quill, '<p>Hello</p>', this.container, options);
+      quill.setSelection(2);
+      const keydownEvent = new KeyboardEvent('keydown', {
+        key: 'tab',
+        shiftKey: true,
+        cancelable: true,
+      });
+
+      quill.root.dispatchEvent(keydownEvent);
+
+      expect(keydownEvent.defaultPrevented).toBe(false);
+      expect(quill.root).toEqualHTML('<p>Hello</p>');
+    });
+
     it('should indent a list item on Tab even when the caret is not at the start of the line', function () {
       const quill = this.initialize(
         Quill,
@@ -547,6 +630,7 @@ describe('Keyboard', function () {
           </ol>
         `,
         this.container,
+        options,
       );
       quill.setSelection(2);
       const keydownEvent = new KeyboardEvent('keydown', {
@@ -573,6 +657,7 @@ describe('Keyboard', function () {
           </ol>
         `,
         this.container,
+        options,
       );
       quill.setSelection(2);
       const keydownEvent = new KeyboardEvent('keydown', {
@@ -592,7 +677,7 @@ describe('Keyboard', function () {
     });
   });
 
-  describe('indent/outdent in a code-block (unaffected by the tab fix)', function () {
+  describe('indent/outdent in a code-block (unaffected by inlineTabInsertion)', function () {
     it('should still indent the line on Tab inside a code-block', function () {
       const quill = this.initialize(
         Quill,
