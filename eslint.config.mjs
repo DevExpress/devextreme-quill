@@ -20,7 +20,7 @@ export default defineConfig([globalIgnores([
     "node_modules/**/*",
     "test/functional/example/**/*",
 ]), {
-    extends: compat.extends("devextreme/javascript"),
+    ...compat.extends("devextreme/javascript"),
 
     plugins: {
         "@babel": babel,
