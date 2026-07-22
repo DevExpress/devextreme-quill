@@ -11,7 +11,7 @@ overrides:
   lodash.isequal: npm:fast-deep-equal@^3.1.3
   fast-uri@<=3.1.1: ^3.1.2
   '@babel/plugin-transform-modules-systemjs@>=7.12.0 <=7.29.3': ^7.29.4
-  brace-expansion@>=5.0.0 <5.0.6: ^5.0.6
+  brace-expansion@<5.0.7: ^5.0.7
   uuid@<11.1.1: ^11.1.1
   qs@>=6.11.1 <=6.15.1: ^6.15.2
   shell-quote@>=1.1.0 <=1.8.3: ^1.8.4
@@ -151,7 +151,7 @@ importers:
         version: 4.9.5
       wait-on:
         specifier: ^9.0.6
-        version: 9.0.10
+        version: 9.0.10(debug@4.4.3)
       webpack:
         specifier: ^5.74.0
         version: 5.107.2(postcss@8.5.15)(webpack-cli@5.1.4)
@@ -1564,9 +1564,6 @@ packages:
   babel-plugin-syntax-trailing-function-commas@6.22.0:
     resolution: {integrity: sha512-Gx9CH3Q/3GKbhs07Bszw5fPTlU+ygrOGfAhEt7W2JICwufpC4SuO0mG0+4NykPBSYPMJhqvVlDBU17qB1D+hMQ==}
 
-  balanced-match@1.0.2:
-    resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
-
   balanced-match@4.0.4:
     resolution: {integrity: sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==}
     engines: {node: 18 || 20 || >=22}
@@ -1604,14 +1601,8 @@ packages:
   bowser@2.14.1:
     resolution: {integrity: sha512-tzPjzCxygAKWFOJP011oxFHs57HzIhOEracIgAePE4pqB3LikALKnSzUyU4MGs9/iCEUuHlAJTjTc5M+u7YEGg==}
 
-  brace-expansion@1.1.15:
-    resolution: {integrity: sha512-EwOCDEex4quD37XhqM3omwtMoJjr//isUZz1JopUNWms+4Z2ViyM/k1YIRePpoVNnQhENnxtFjLaxNHrT7xIUg==}
-
-  brace-expansion@2.1.1:
-    resolution: {integrity: sha512-WR1cURNjuvBLMZBMbqM0UoE+WAfdUcEV1ccD8PVBVOI+Z3ND4+SZbN8RsfT2bMuG1qwz5RFvPukSZm5fF2D5eA==}
-
-  brace-expansion@5.0.6:
-    resolution: {integrity: sha512-kLpxurY4Z4r9sgMsyG0Z9uzsBlgiU/EFKhj/h91/8yHu0edo7XuixOIH3VcJ8kkxs6/jPzoI6U9Vj3WqbMQ94g==}
+  brace-expansion@5.0.7:
+    resolution: {integrity: sha512-7oFy703dxfY3/NLxC1fh2SUCQ0H9rmAY+5EpDVfXjUTTs+HEwR2nYaqLv+GWcTsumwxPfiz6CzCNkwXwBUwqCA==}
     engines: {node: 18 || 20 || >=22}
 
   braces@3.0.3:
@@ -1769,9 +1760,6 @@ packages:
   compression@1.8.1:
     resolution: {integrity: sha512-9mAqGPHLakhCLeNyxPkK4xVo746zQ/czLH1Ky+vkitMnWfWZps8r0qXuwhwizagCRttsL4lfG4pIOvaWLpAP0w==}
     engines: {node: '>= 0.8.0'}
-
-  concat-map@0.0.1:
-    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
   concurrently@7.6.0:
     resolution: {integrity: sha512-BKtRgvcJGeZ4XttiDiNcFiRlxoAeZOseqUvyYRUp/Vtd+9p1ULmeoSqGsDA+2ivdeDFpqrJvGvmI+StKfKl5hw==}
@@ -6412,7 +6400,7 @@ snapshots:
 
   axe-core@4.12.1: {}
 
-  axios@1.18.0:
+  axios@1.18.0(debug@4.4.3):
     dependencies:
       follow-redirects: 1.16.0(debug@4.4.3)
       form-data: 4.0.6
@@ -6490,8 +6478,6 @@ snapshots:
 
   babel-plugin-syntax-trailing-function-commas@6.22.0: {}
 
-  balanced-match@1.0.2: {}
-
   balanced-match@4.0.4: {}
 
   base64id@2.0.0: {}
@@ -6532,16 +6518,7 @@ snapshots:
 
   bowser@2.14.1: {}
 
-  brace-expansion@1.1.15:
-    dependencies:
-      balanced-match: 1.0.2
-      concat-map: 0.0.1
-
-  brace-expansion@2.1.1:
-    dependencies:
-      balanced-match: 1.0.2
-
-  brace-expansion@5.0.6:
+  brace-expansion@5.0.7:
     dependencies:
       balanced-match: 4.0.4
 
@@ -6716,8 +6693,6 @@ snapshots:
       vary: 1.1.2
     transitivePeerDependencies:
       - supports-color
-
-  concat-map@0.0.1: {}
 
   concurrently@7.6.0:
     dependencies:
@@ -8527,19 +8502,19 @@ snapshots:
 
   minimatch@10.2.5:
     dependencies:
-      brace-expansion: 5.0.6
+      brace-expansion: 5.0.7
 
   minimatch@3.1.5:
     dependencies:
-      brace-expansion: 1.1.15
+      brace-expansion: 5.0.7
 
   minimatch@5.1.9:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 5.0.7
 
   minimatch@9.0.9:
     dependencies:
-      brace-expansion: 2.1.1
+      brace-expansion: 5.0.7
 
   minimist@1.2.8: {}
 
@@ -9892,9 +9867,9 @@ snapshots:
 
   void-elements@2.0.1: {}
 
-  wait-on@9.0.10:
+  wait-on@9.0.10(debug@4.4.3):
     dependencies:
-      axios: 1.18.0
+      axios: 1.18.0(debug@4.4.3)
       joi: 18.2.3
       lodash: 4.18.1
       minimist: 1.2.8
