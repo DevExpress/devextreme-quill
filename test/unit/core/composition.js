@@ -62,7 +62,7 @@ function getScrollMock(target) {
 describe('composition events', function () {
   it('subscription on compositionstart and compositionend events should be', function () {
     const scrollMock = getScrollMock({});
-     
+
     new Composition(scrollMock.scroll, {});
 
     const { addEventListenerCallsArgs } = scrollMock.getAddEventListenerArgs();

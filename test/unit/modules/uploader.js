@@ -71,7 +71,6 @@ describe('Uploader', function () {
         root: document.createElement('input'),
       };
 
-       
       new Uploader(quillMock);
       const dataTransferInstance = new DataTransfer();
       dataTransferInstance.setData('text/plain', 'just text');
@@ -90,7 +89,6 @@ describe('Uploader', function () {
         root: document.createElement('input'),
       };
 
-       
       new Uploader(quillMock);
       const dataTransferInstance = new DataTransfer();
       const fileContent = ['<u>test</u>'];

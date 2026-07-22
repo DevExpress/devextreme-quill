@@ -440,7 +440,7 @@ describe('Clipboard', function () {
         const regex = /https?:\/\/[^\s]+/g;
         let match = null;
         const composer = new Delta();
-         
+
         while ((match = regex.exec(node.data))) {
           composer.retain(match.index - index);
           index = regex.lastIndex;
