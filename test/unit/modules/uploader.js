@@ -71,7 +71,7 @@ describe('Uploader', function () {
         root: document.createElement('input'),
       };
 
-      // eslint-disable-next-line no-new
+       
       new Uploader(quillMock);
       const dataTransferInstance = new DataTransfer();
       dataTransferInstance.setData('text/plain', 'just text');
@@ -90,7 +90,7 @@ describe('Uploader', function () {
         root: document.createElement('input'),
       };
 
-      // eslint-disable-next-line no-new
+       
       new Uploader(quillMock);
       const dataTransferInstance = new DataTransfer();
       const fileContent = ['<u>test</u>'];

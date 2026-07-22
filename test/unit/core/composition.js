@@ -62,7 +62,7 @@ function getScrollMock(target) {
 describe('composition events', function () {
   it('subscription on compositionstart and compositionend events should be', function () {
     const scrollMock = getScrollMock({});
-    // eslint-disable-next-line no-new
+     
     new Composition(scrollMock.scroll, {});
 
     const { addEventListenerCallsArgs } = scrollMock.getAddEventListenerArgs();

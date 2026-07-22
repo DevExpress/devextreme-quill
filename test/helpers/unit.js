@@ -48,7 +48,7 @@ function compareHTML(actual, expected, ignoreClassId, ignoreUI = true) {
       container.innerHTML.replace(/\s/g, '').length
       !== html.replace(/\s/g, '').length
     ) {
-      console.error('Invalid markup', html); // eslint-disable-line no-console
+      console.error('Invalid markup', html);  
       throw new Error('Invalid markup passed to compareHTML');
     }
     if (ignoreUI) {
@@ -97,8 +97,8 @@ function compareHTML(actual, expected, ignoreClassId, ignoreUI = true) {
   }
   const message = compareNodes(div1, div2, ignoredAttributes);
   if (message != null) {
-    console.error(div1.innerHTML); // eslint-disable-line no-console
-    console.error(div2.innerHTML); // eslint-disable-line no-console
+    console.error(div1.innerHTML);  
+    console.error(div2.innerHTML);  
     return { pass: false, message };
   }
   return { pass: true, message: 'HTMLs equal' };

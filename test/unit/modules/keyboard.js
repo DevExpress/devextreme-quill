@@ -172,7 +172,7 @@ describe('Keyboard', function () {
           },
         };
         let counter = 0;
-        // eslint-disable-next-line no-new
+         
         new Keyboard(quillMock, {
           onKeydown: () => {
             counter += 1;
@@ -236,7 +236,7 @@ describe('Keyboard', function () {
         nativeAddEventListener.call(this, type, modifiedHandler);
       };
 
-      // eslint-disable-next-line no-new
+       
       new Keyboard(quillMock, {
         bindings: {
           66: {

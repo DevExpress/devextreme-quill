@@ -1,6 +1,3 @@
-/* eslint-disable no-undef */
-/* eslint-env node */
-
 const createTestCafe = require('testcafe');
 const process = require('process');
 const parseArgs = require('minimist');
@@ -24,7 +21,7 @@ createTestCafe({
     setTestingPlatform(args);
 
     const browsers = args.browsers.split(' ').map(expandBrowserAlias);
-    // eslint-disable-next-line no-console
+
     console.log('Browsers:', browsers);
 
     const runner = testCafe.createRunner()
