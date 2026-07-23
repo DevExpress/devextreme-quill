@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import hljs from 'highlight.js';
 import Delta from 'quill-delta';
 import Quill from '../../../core/quill';

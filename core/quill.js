@@ -218,7 +218,7 @@ class Quill {
 
   formatLine(index, length, name, value, source) {
     let formats;
-    // eslint-disable-next-line prefer-const
+
     [index, length, formats, source] = overload(
       index,
       length,
@@ -239,7 +239,7 @@ class Quill {
 
   formatText(index, length, name, value, source) {
     let formats;
-    // eslint-disable-next-line prefer-const
+
     [index, length, formats, source] = overload(
       index,
       length,
@@ -351,7 +351,7 @@ class Quill {
 
   insertText(index, text, name, value, source) {
     let formats;
-    // eslint-disable-next-line prefer-const
+
     [index, , formats, source] = overload(index, 0, name, value, source);
     return modify.call(
       this,
@@ -594,7 +594,7 @@ function modify(modifier, source, index, shift) {
   const change = modifier();
   if (range != null) {
     if (index === true) {
-      index = range.index; // eslint-disable-line prefer-destructuring
+      index = range.index;
     }
     if (shift == null) {
       range = shiftRange(range, change, source);
@@ -621,11 +621,11 @@ function overload(index, length, name, value, source) {
       source = value;
       value = name;
       name = length;
-      length = index.length; // eslint-disable-line prefer-destructuring
-      index = index.index; // eslint-disable-line prefer-destructuring
+      length = index.length;
+      index = index.index;
     } else {
-      length = index.length; // eslint-disable-line prefer-destructuring
-      index = index.index; // eslint-disable-line prefer-destructuring
+      length = index.length;
+      index = index.index;
     }
   } else if (typeof length !== 'number') {
     source = value;

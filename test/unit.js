@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import Quill from '../quill.js';
 import CodeBlock, { CodeBlockContainer } from '../formats/code';
 

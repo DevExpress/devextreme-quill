@@ -19,7 +19,7 @@ describe('Link', function () {
 
   it('add invalid', function () {
     const editor = this.initialize(Editor, '<p>0123</p>');
-    editor.formatText(1, 2, { link: 'javascript:alert(0);' }); // eslint-disable-line no-script-url
+    editor.formatText(1, 2, { link: 'javascript:alert(0);' });
     expect(editor.getDelta()).toEqual(
       new Delta()
         .insert('0')

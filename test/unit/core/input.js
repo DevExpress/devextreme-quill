@@ -38,7 +38,6 @@ describe('subscriptions', function () {
 
     const { quill } = quillMock;
 
-    // eslint-disable-next-line no-new
     new Input(quill, {});
 
     const addEventListenerInfo = quillMock.getCallbackInfo('addEventListener');
@@ -54,7 +53,6 @@ describe('subscriptions', function () {
 
     const { quill } = quillMock;
 
-    // eslint-disable-next-line no-new
     new Input(quill, {});
 
     const quillOnInfo = quillMock.getCallbackInfo('on');

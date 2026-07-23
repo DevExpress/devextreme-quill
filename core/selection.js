@@ -57,7 +57,7 @@ class Selection {
             );
           }
           this.update(Emitter.sources.SILENT);
-        } catch (ignored) {
+        } catch {
           // ignore
         }
       });
@@ -415,7 +415,7 @@ function contains(parent, descendant) {
   try {
     // Firefox inserts inaccessible nodes around video elements
     descendant.parentNode; // eslint-disable-line no-unused-expressions
-  } catch (e) {
+  } catch {
     return false;
   }
 
