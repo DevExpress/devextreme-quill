@@ -17,6 +17,7 @@ overrides:
   shell-quote@<1.9.0: ^1.10.0
   fast-uri@<3.1.4: ^3.1.4
   body-parser@<2.3.0: ^2.3.0
+  postcss@<8.5.18: ^8.5.18
 
 allowBuilds:
   core-js: true
