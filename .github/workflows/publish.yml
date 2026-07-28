@@ -50,6 +50,19 @@ jobs:
       - name: Set GitHub Packages auth
         run: pnpm set //npm.pkg.github.com/:_authToken='${NODE_AUTH_TOKEN}'
 
+      - name: Publish package to GitHub Packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          package_dir="$RUNNER_TEMP/github-package"
+          rm -rf "$package_dir"
+          mkdir -p "$package_dir"
+          tar -xzf "$PACKAGE_TGZ" -C "$package_dir"
+          jq '.name = "@devexpress/devextreme-quill" | .publishConfig = {registry:"https://npm.pkg.github.com"}' "$package_dir/package/package.json" > "$package_dir/package/package.json.tmp"
+          mv "$package_dir/package/package.json.tmp" "$package_dir/package/package.json"
+          cd "$package_dir/package"
+          pnpm publish --no-git-checks
+
       - name: Build SBOM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
