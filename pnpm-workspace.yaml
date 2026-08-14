@@ -19,6 +19,7 @@ overrides:
   body-parser@<2.3.0: ^2.3.0
   postcss@<8.5.18: ^8.5.18
   'socket.io-parser@<4.2.7': ^4.2.7
+  nanoid@<3.3.18: ^3.3.18
 
 allowBuilds:
   core-js: true
