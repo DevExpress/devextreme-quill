@@ -14,7 +14,7 @@ overrides:
   uuid@<11.1.1: ^11.1.1
   qs@<6.16.0: ^6.16.0
   shell-quote@>=1.1.0 <=1.8.3: ^1.8.4
-  js-yaml@<4.3.1: ^4.3.1
+  js-yaml@<4.3.2: ^4.3.2
   http-proxy-middleware@>=0.16.0 <3.0.6: ^3.0.6
   shell-quote@<1.9.0: ^1.10.0
   fast-uri@<3.1.6: ^3.1.6
@@ -23,6 +23,8 @@ overrides:
   socket.io-parser@<4.2.7: ^4.2.7
   nanoid@<3.3.18: ^3.3.18
   browserslist@<4.28.7: ^4.28.7
+  colord@<2.9.4: ^2.9.4
+  joi@<18.2.4: ^18.2.4
 
 importers:
 
@@ -172,7 +174,7 @@ importers:
         version: 5.108.4(postcss@8.5.23)(webpack-cli@7.2.1)
       webpack-cli:
         specifier: ^7.2.1
-        version: 7.2.1(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
+        version: 7.2.1(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
       webpack-dev-server:
         specifier: ^6.0.0
         version: 6.0.0(tslib@2.8.1)(webpack-cli@7.2.1)(webpack@5.108.4)
@@ -1824,8 +1826,8 @@ packages:
   color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
 
-  colord@2.9.3:
-    resolution: {integrity: sha512-jeC1axXpnb0/2nn/Y1LPuLdgXBLH7aDcHu4KEKfqw3CUhX7ZpfBSlPKyqXE6btIgEzfWtrX3/tyBCaCvXvMkOw==}
+  colord@2.10.0:
+    resolution: {integrity: sha512-AidJptpBJmjTclAp9BkLwJi0T93fo5epJnbaZslpg6QVzpHjAiveF55mE9AcUJiGMqRHgMDY8soMsQtuNYMHfw==}
 
   combined-stream@1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
@@ -3243,8 +3245,8 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
 
-  joi@18.2.3:
-    resolution: {integrity: sha512-N5A3KTWQpPWT4ExxxPlUx7WmykGXRzhNidWhV41d6Abu9YfI2NyWCJuxdPnslJCPWtbRpSVOWSnSS6GakLM/Rg==}
+  joi@18.2.8:
+    resolution: {integrity: sha512-G2TX62h58ZHuwqetJgP2F4ualakqAmZtBYe3jWen7gxQRw5xApX6crnFtuB91WC0c3ESBnva+kGSnb3+6pIQDQ==}
     engines: {node: '>= 20'}
 
   js-md4@0.3.2:
@@ -3256,8 +3258,8 @@ packages:
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
-  js-yaml@4.3.1:
-    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
+  js-yaml@4.3.2:
+    resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
     hasBin: true
 
   jsesc@3.1.0:
@@ -4876,7 +4878,7 @@ packages:
     engines: {node: '>=20.9.0'}
     hasBin: true
     peerDependencies:
-      js-yaml: ^4.3.1
+      js-yaml: ^4.3.2
       json5: ^2.2.3
       toml: ^3.0.0 || ^4.0.0
       webpack: ^5.101.0
@@ -5920,7 +5922,7 @@ snapshots:
       globals: 14.0.0
       ignore: 5.3.2
       import-fresh: 3.3.1
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       minimatch: 3.1.5
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
@@ -5983,7 +5985,7 @@ snapshots:
       camelcase: 5.3.1
       find-up: 4.1.0
       get-package-type: 0.1.0
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       resolve-from: 5.0.0
 
   '@istanbuljs/schema@0.1.6': {}
@@ -7087,7 +7089,7 @@ snapshots:
 
   color-name@1.1.4: {}
 
-  colord@2.9.3: {}
+  colord@2.10.0: {}
 
   combined-stream@1.0.8:
     dependencies:
@@ -7173,7 +7175,7 @@ snapshots:
   cosmiconfig@8.3.6(typescript@4.9.5):
     dependencies:
       import-fresh: 3.3.1
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
@@ -8681,7 +8683,7 @@ snapshots:
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
-  joi@18.2.3:
+  joi@18.2.8:
     dependencies:
       '@hapi/address': 5.1.1
       '@hapi/formula': 3.0.2
@@ -8697,7 +8699,7 @@ snapshots:
 
   js-tokens@4.0.0: {}
 
-  js-yaml@4.3.1:
+  js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
 
@@ -9988,7 +9990,7 @@ snapshots:
       '@csstools/media-query-list-parser': 2.1.13(@csstools/css-parser-algorithms@2.7.1(@csstools/css-tokenizer@2.4.1))(@csstools/css-tokenizer@2.4.1)
       '@csstools/selector-specificity': 3.1.1(postcss-selector-parser@6.1.4)
       balanced-match: 2.0.0
-      colord: 2.9.3
+      colord: 2.10.0
       cosmiconfig: 8.3.6(typescript@4.9.5)
       css-functions-list: 3.3.3
       css-tree: 2.3.1
@@ -10503,7 +10505,7 @@ snapshots:
   wait-on@9.0.10(debug@4.4.3):
     dependencies:
       axios: 1.18.0(debug@4.4.3)
-      joi: 18.2.3
+      joi: 18.2.8
       lodash: 4.18.1
       minimist: 1.2.8
       rxjs: 7.8.2
@@ -10515,7 +10517,7 @@ snapshots:
     dependencies:
       graceful-fs: 4.2.11
 
-  webpack-cli@7.2.1(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4):
+  webpack-cli@7.2.1(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4):
     dependencies:
       '@discoveryjs/json-ext': 1.1.0
       commander: 14.0.3
@@ -10527,7 +10529,7 @@ snapshots:
       webpack: 5.108.4(postcss@8.5.23)(webpack-cli@7.2.1)
       webpack-merge: 6.0.1
     optionalDependencies:
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       json5: 2.2.3
       webpack-dev-server: 6.0.0(tslib@2.8.1)(webpack-cli@7.2.1)(webpack@5.108.4)
 
@@ -10572,7 +10574,7 @@ snapshots:
       ws: 8.21.0
     optionalDependencies:
       webpack: 5.108.4(postcss@8.5.23)(webpack-cli@7.2.1)
-      webpack-cli: 7.2.1(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
+      webpack-cli: 7.2.1(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -10612,7 +10614,7 @@ snapshots:
       watchpack: 2.5.2
       webpack-sources: 3.5.0
     optionalDependencies:
-      webpack-cli: 7.2.1(js-yaml@4.3.1)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
+      webpack-cli: 7.2.1(js-yaml@4.3.2)(json5@2.2.3)(webpack-dev-server@6.0.0)(webpack@5.108.4)
     transitivePeerDependencies:
       - '@minify-html/node'
       - '@swc/core'
