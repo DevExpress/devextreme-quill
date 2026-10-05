@@ -7,3 +7,4 @@ overrides:
   brace-expansion@<5.0.12: ^5.0.12
   fast-uri@<3.1.8: ^3.1.8
   qs@<6.16.0: ^6.16.0
+  http-cache-semantics@<4.2.1: ^4.2.1

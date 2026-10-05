@@ -28,6 +28,7 @@ overrides:
   moment@<2.31.0: ^2.31.0
   engine.io@<6.6.11: ^6.6.11
   webpack-dev-middleware@<8.3.0: ^8.3.0
+  http-cache-semantics@<4.2.1: ^4.2.1
 
 importers:
 
@@ -2834,8 +2835,8 @@ packages:
     resolution: {integrity: sha512-ztqyC3kLto0e9WbNp0aeP+M3kTt+nbaIveGmUxAtZa+8iFgKLUOD4YKM5j+f3QD89bra7UeumolZHKuOXnTmeQ==}
     engines: {node: '>=8'}
 
-  http-cache-semantics@4.2.0:
-    resolution: {integrity: sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ==}
+  http-cache-semantics@4.3.0:
+    resolution: {integrity: sha512-M5t5LlJpS1UHMjvwRQVdFHvPISGeLAxNcrWuJkeGh0KxsqCHZ1O3NXZU/8x7cD0BDcGW8kapxMKTvwlqrNkHkA==}
 
   http-errors@1.8.1:
     resolution: {integrity: sha512-Kpk9Sm7NmI+RHhnj6OIWDI1d6fIoFAtFt9RLaTMRlg/8w49juAStsrBgp0Dp4OdxdVbRIeKhtCUvoi/RuAhO4g==}
@@ -8280,7 +8281,7 @@ snapshots:
 
   html-tags@3.3.1: {}
 
-  http-cache-semantics@4.2.0: {}
+  http-cache-semantics@4.3.0: {}
 
   http-errors@1.8.1:
     dependencies:
@@ -10141,7 +10142,7 @@ snapshots:
       crypto-md5: 1.0.0
       debug: 4.3.1
       esotope-hammerhead: 0.6.9
-      http-cache-semantics: 4.2.0
+      http-cache-semantics: 4.3.0
       iconv-lite: 0.5.1
       lodash: 4.18.1
       lru-cache: 11.0.2
