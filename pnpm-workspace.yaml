@@ -13,8 +13,8 @@ overrides:
   js-yaml@<4.3.2: "^4.3.2"
   http-proxy-middleware@>=0.16.0 <3.0.6: ^3.0.6
   shell-quote@<1.11.0: ^1.11.0
-  fast-uri@<3.1.8: ^3.1.8
-  body-parser@<2.3.0: ^2.3.0
+  fast-uri@<3.1.9: ^3.1.9
+  body-parser@<2.4.0: ^2.4.0
   postcss@<8.5.18: ^8.5.18
   'socket.io-parser@<4.2.7': ^4.2.7
   nanoid@<3.3.18: ^3.3.18
