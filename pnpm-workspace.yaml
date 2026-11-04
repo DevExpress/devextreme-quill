@@ -20,7 +20,7 @@ overrides:
   nanoid@<3.3.18: ^3.3.18
   browserslist@<4.28.7: ^4.28.7
   colord@<2.9.4: ^2.9.4
-  joi@<18.2.4: ^18.2.4
+  joi@<18.3.1: ^18.3.1
   moment@<2.31.0: ^2.31.0
   engine.io@<6.6.11: ^6.6.11
   webpack-dev-middleware@<8.3.0: ^8.3.0
@@ -29,8 +29,10 @@ overrides:
   source-map-js@<1.2.2: ^1.2.2
   compression@<1.8.2: ^1.8.2
   postcss-selector-parser@<7.1.6 : ^7.1.6
-  follow-redirects@<1.16.1: ^1.16.1
+  follow-redirects@<1.16.2: ^1.16.2
   launch-editor@<2.14.2: ^2.14.2
+  glob@>=9.0.0 <14.0.2: ^14.0.2
+  minimatch@>=7.0.0 <11.0.1: ^11.0.1
 
 allowBuilds:
   core-js: true
