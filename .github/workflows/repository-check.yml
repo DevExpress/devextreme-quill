@@ -21,6 +21,5 @@ jobs:
           ignoredAdvisories: [
             'GHSA-2gmp-34j9-fqjm', // replicator
             'GHSA-vfj7-8cjw-p6xm', // braces, no patch available, 2026-10-09
-            'GHSA-g3hv-75wg-m249', // minimatch, no patch for 3.x and 5.x, 2026-11-02
           ]
         }
