@@ -1,7 +1,7 @@
 {
   "name": "devextreme-quill",
   "version": "1.8.0",
-  "packageManager": "pnpm@11.7.0+sha512.19cc852c120c7125760f2443ee6be0ca5b40f9f50598de1a09a1f177503e010e57c23c77646e01e761de59bf874fb22a3398c33ab9691fc13eb946b6f0f4d620",
+  "packageManager": "pnpm@11.28.12+sha512.94833387e35d503e8ad1010417cdeb82c120e7e69bafdf0a9db0690515beae7159274571e692b96abc2a085d3566fec54381afd978f65f64a85362dfd7e108f7",
   "description": "Core of the DevExtreme HtmlEditor",
   "author": "Developer Express Inc.",
   "main": "dist/dx-quill.js",
